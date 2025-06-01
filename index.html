@@ -1,299 +1,306 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex, nofollow">
-    <title>baba ji</title>
-    <style>
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        #dialogText {
-            color: white;
-            background-color: #333333;
-        }
-        
-        #dialogWrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: table;
-            background-color: #EEEEEE;
-        }
-        
-        #dialogWrapCell {
-            display: table-cell;
-            text-align: center;
-            vertical-align: middle;
-        }
-        
-        #mainDialog {
-            max-width: 400px;
-            margin: 5px;
-            border: solid #AAAAAA 1px;
-            border-radius: 10px;
-            box-shadow: 3px 3px 5px 3px #AAAAAA;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #FFFFFF;
-            overflow: hidden;
-            text-align: left;
-        }
-        #mainDialog > * {
-            padding: 10px 30px;
-        }
-        #passArea {
-            padding: 20px 30px;
-            background-color: white;
-        }
-        #passArea > * {
-            margin: 5px auto;
-        }
-        #pass {
-            width: 100%;
-            height: 40px;
-            font-size: 30px;
-        }
-        
-        #messageWrapper {
-            float: left;
-            vertical-align: middle;
-            line-height: 30px;
-        }
-        
-        .notifyText {
-            display: none;
-        }
-        
-        #invalidPass {
-            color: red;
-        }
-        
-        #success {
-            color: green;
-        }
-        
-        #submitPass {
-            font-size: 20px;
-            border-radius: 5px;
-            background-color: #E7E7E7;
-            border: solid gray 1px;
-            float: right;
-            cursor: pointer;
-        }
-        #contentFrame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #attribution {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 0.8em;
-        }
-        #attribution, #attribution a {
-            color: #999;
-        }
-        .error {
-            display: none;
-            color: red;
-        }
-    </style>
-  </head>
-  <body>
-    <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
-    <div id="dialogWrap">
-        <div id="dialogWrapCell">
-            <div id="mainDialog">
-                <div id="dialogText">Tala laga hai.</div>
-                <div id="passArea">
-                    <p id="passwordPrompt">Password</p>
-                    <input id="pass" type="password" name="pass" autofocus>
-                    <div>
-                        <span id="messageWrapper">
-                            <span id="invalidPass" class="error">failure hai tu</span>
-                            <span id="trycatcherror" class="error">fail, yeh kaise</span>
-                            <span id="success" class="notifyText">oh bahi pass hogaya, party de</span>
-                            &nbsp;
-                        </span>
-                        <button id="submitPass" type="button">Submit</button>
-                        <div style="clear: both;"></div>
-                    </div>
-                </div>
-                <div id="securecontext" class="error">
-                    <p>
-                        arre tau page load via HTTPS kare nahi toh na chale hai e.
-                    </p>
-                </div>
-                <div id="nocrypto" class="error">
-                    <p>
-                        budhe kya karga login kar ke.
-                    </p>
-                </div>
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-950">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock AI Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tab-active {
+      background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
+      color: white !important;
+      box-shadow: 0 4px 20px #6366f17a;
+    }
+    .tab-btn {
+      transition: all 0.2s;
+    }
+    .tab-btn:not(.tab-active):hover {
+      background: #232334;
+      color: #a78bfa;
+    }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+  <div class="max-w-5xl mx-auto py-10 px-4">
+    <header class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold tracking-tight">📊 Stock Dashboard</h1>
+      <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl font-semibold shadow-lg text-white text-sm transition">shit</button>
+    </header>
+    <nav class="flex gap-3 mb-8">
+      <button id="tab1" class="tab-btn tab-active px-5 py-2 rounded-xl font-semibold">Price Hike Prediction</button>
+      <button id="tab2" class="tab-btn px-5 py-2 rounded-xl font-semibold">Price Low Prediction</button>
+      <button id="tab3" class="tab-btn px-5 py-2 rounded-xl font-semibold">Nifty News</button>
+      <button id="tab4" class="tab-btn px-5 py-2 rounded-xl font-semibold">Reports</button>
+    </nav>
+    <div id="content1" class="tab-content">
+      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-lime-400">▲</span> Price Hike Prediction
+        </h2>
+        <div class="space-y-4">
+          
+          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
+            <div>
+              <div class="font-semibold text-lg whitespace-pre-line">01-06-2024:
+                HDFCBANK - Stoploss: -1%, Target: +2.5%
+SBIN - Stoploss: -2.1%, Target: +3.2%
+DLF - Stoploss: -1.1%, Target: +0.63%
+              </div>
+             <!-- <div class="text-sm text-gray-400">Expected: +5.1% today</div> -->
             </div>
+            <!-- <button class="bg-lime-500 hover:bg-lime-600 text-gray-900 font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
+          </div>
+         
         </div>
+        <br>
+        <br>
+        <div class="space-y-4">
+          
+          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
+            <div>
+              <div class="font-semibold text-lg whitespace-pre-line">31-05-2024:
+                DLF - 7%, 6%
+GLENMARK - 9%, 8%
+HDFCBANK - 6%, 2%
+ICICILOMBARD - 8%, 7%
+              </div>
+             <!-- <div class="text-sm text-gray-400">Expected: +5.1% today</div> -->
+            </div>
+            <!-- <button class="bg-lime-500 hover:bg-lime-600 text-gray-900 font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
+          </div>
+         
+        </div>
+      </section>
     </div>
-    <div id="attribution">
-        sandesha atte hai</a>
+    <div id="content2" class="tab-content hidden">
+      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-pink-400">▼</span> Price Low Prediction
+        </h2>
+                 <div class="space-y-4">
+          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
+            <div>
+              <div class="font-semibold text-lg whitespace-pre-line">01-06-2024:
+BAJAJ_AUTO - Stoploss: +2.9%, Target: -6.8% 
+HINDALCO - Stoploss: +3.7%, Target: -7.6% 
+HCLTECH - Stoploss: +6%, Target: -9% 
+HDFCBANK - Stoploss: - , Target: +3% 
+RELIANCE - Stoploss: - , Target: +7% 
+SBIN - Stoploss: - , Target: +2% 
+CANBK - Stoploss: - , Target: +2%
+               
+              </div>
+              <!-- <div class="text-sm text-gray-400">Expected: -2.1% today</div> -->
+            </div>
+            <!-- <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
+          </div>
+<br>
+<br>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
+            <div>
+              <div class="font-semibold text-lg whitespace-pre-line">31-05-2024:
+BAJAJ-AUTO - 8%, -4–6%
+HINDALCO - 12%, -7–9%
+HCLTECH - 10%, -6–8%
+RELIANCE - N/A, ₹1,530–1,550
+HDFCBANK - N/A, breakout above ₹1,980
+               
+              </div>
+              <!-- <div class="text-sm text-gray-400">Expected: -2.1% today</div> -->
+            </div>
+            <!-- <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
+          </div>
+          
+        </div>
+      </section>
     </div>
-    <script>
-    (function() {
+    <div id="content3" class="tab-content hidden">
+      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+          📰 Nifty News
+        </h2>
+              <ul class="space-y-3">
+          <li class="bg-gray-800 rounded-lg px-4 py-3 whitespace-pre-line">
+            <span class="font-semibold text-indigo-400 whitespace-pre-line">01-06-2025:</span> Certainly! Let’s break down the information from all three LLMs and synthesize a Nifty prediction based on their findings from reputable sources (Investing.com, Yahoo Finance, Bloomberg, Reuters, TradingView, Moneycontrol):
 
-        var pl = "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";
-        
-        var submitPass = document.getElementById('submitPass');
-        var passEl = document.getElementById('pass');
-        var invalidPassEl = document.getElementById('invalidPass');
-        var trycatcherror = document.getElementById('trycatcherror');
-        var successEl = document.getElementById('success');
-        var contentFrame = document.getElementById('contentFrame');
-        
-        // Sanity checks
+Summary of Each LLM’s Findings
+1st LLM
+Market Trend: Mixed trends, with some upward momentum (Sensex up ~320 points), but sector-specific declines (FMCG, Auto, Metal down).
+Technical View: Resistance and support levels mentioned, suggesting consolidation.
+Institutional Activity: FIIs and DIIs were net buyers.
+Prediction: Market is consolidating, with some upward bias but not a clear breakout.
+2nd LLM
+Market Trend: Mixed signals and volatility.
+Pre-market: Indicated early gains.
+Intraday: Opened strong but faced selling pressure later.
+Prediction: Volatile session, with initial optimism fading into selling—no clear direction, but hints at possible weakness.
+3rd LLM (with browsing)
+Market Trend: Nifty closed lower, broad-based sectoral selling, weekly loss.
+Technical View: Resistance near 22,800–23,000; support at 22,200–22,400. High call writing at resistance, indicating skepticism about upside.
+Influencing Factors: Global headwinds, profit-taking, cautious sentiment.
+Prediction: Near-term caution and downside, but long-term bullishness remains.
+Synthesis & Prediction
+Common Themes
+Short-term:
 
-        if (pl === "") {
-            submitPass.disabled = true;
-            passEl.disabled = true;
-            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
-            return;
-        }
+Volatility and consolidation are dominant.
+Selling pressure is evident, especially after initial gains.
+Technical resistance is strong; upside is capped for now.
+Institutional flows are mixed but not enough to drive a breakout.
+Global factors (geopolitics, US yields) are weighing on sentiment.
+Long-term:
 
-        if (!isSecureContext) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#securecontext").style.display = "block";
-            return;
-        }
+Bullish undertone due to strong fundamentals and earnings, but not immediately relevant for the next few sessions.
+Consensus Prediction
+Short-term (next few sessions):
 
-        if (!crypto.subtle) {
-            document.querySelector("#passArea").style.display = "none";
-            document.querySelector("#nocrypto").style.display = "block";
-            return;
-        }
-        
-        function str2ab(str) {
-            var ustr = atob(str);
-            var buf = new ArrayBuffer(ustr.length);
-            var bufView = new Uint8Array(buf);
-            for (var i=0, strLen=ustr.length; i < strLen; i++) {
-                bufView[i] = ustr.charCodeAt(i);
-            }
-            return bufView;
-        }
+Nifty is likely to remain under pressure or consolidate with a slight downward bias.
+Upside is capped near resistance levels (22,800–23,000).
+Support is seen around 22,200–22,400; a break below could trigger more selling.
+Volatility will persist due to global and domestic factors.
+Long-term:
 
-        async function deriveKey(salt, password) {
-            const encoder = new TextEncoder()
-            const baseKey = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode(password),
-                'PBKDF2',
-                false,
-                ['deriveKey'],
-            )
-            return await crypto.subtle.deriveKey(
-                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-                baseKey,
-                { name: 'AES-GCM', length: 256 },
-                true,
-                ['decrypt'],
-            )
-        }
-        
-        async function doSubmit(evt) {
-            submitPass.disabled = true;
-            passEl.disabled = true;
+Bullish outlook remains intact, but current environment favors caution.
+Final Answer:
+Based on the combined analysis from all three LLMs and the latest data from major financial sources, the Nifty is expected to remain volatile and may trend slightly downward or consolidate in the near term. Upside is limited by strong resistance, and caution is advised for the next few sessions. However, the long-term outlook remains positive.
 
-            let iv, ciphertext, key;
-            
-            try {
-                var unencodedPl = str2ab(pl);
+If you are trading or investing in the short term, be cautious and watch for support near 22,200–22,400 and resistance near 22,800–23,000.
 
-                const salt = unencodedPl.slice(0, 32)
-                iv = unencodedPl.slice(32, 32 + 16)
-                ciphertext = unencodedPl.slice(32 + 16)
+Let me know if you want a more detailed technical analysis or sector-specific outlook!
+          </li>
+          
+        </ul>
+        <br>
+        <br>
+        <ul class="space-y-3">
+          <li class="bg-gray-800 rounded-lg px-4 py-3 whitespace-pre-line">
+            <span class="font-semibold text-indigo-400 whitespace-pre-line">01-06-2025:</span>  certainly! Let’s break down the Nifty prediction based on the three LLM responses you provided, which reference data from major financial sources (Investing.com, Yahoo Finance, Bloomberg, Reuters, TradingView, Moneycontrol) and recent market activity.
 
-                key = await deriveKey(salt, passEl.value);
-            } catch (e) {
-                trycatcherror.style.display = "inline";
-                console.error(e);
-                return;
-            }
+Summary of Each LLM’s Prediction
+1st LLM
+Summary:
+Mixed signals, with sectoral divergence (FMCG underperforming, midcaps resilient).
+Weekly trend: Decline due to profit-booking and global cues.
+Technicals: Key resistance and support levels highlighted, but no clear directional call.
+Tone: Cautious, suggests checking real-time data for actionable insights.
+2nd LLM
+Summary:
+Recent days: Volatility, with Nifty ending the week lower due to macro concerns.
+Sectors: FMCG and Auto weak; some banks and IT stocks strong.
+Short-term: Flat to slightly negative, with cautious trading expected.
+Long-term: Bullish (projection for 2025 is much higher), but short-term volatility persists.
+Tone: Short-term cautious/neutral, long-term bullish.
+3rd LLM (with browsing)
+Summary:
+Short-term (May 30, 2025): Upward momentum expected, driven by strong FPI inflows and positive sentiment ahead of GDP data.
+Technicals: Resistance at 24,820–24,900; breakout above 24,900 could trigger a rally to 25,000+. Support at 24,690; below this, correction to 24,470 possible.
+Sectors: FMCG weak, banks strong.
+Tone: Cautiously optimistic for an upward move, but with caveats (watch for GDP data and global cues).
+Consensus & Prediction
+Short-Term (Next Session/Day or Two)
+Most Recent Data (3rd LLM):
 
-            try {
-                const decryptedArray = new Uint8Array(
-                    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
-                );
+Bias: Upward/positive, with a likely rally if Nifty breaks above 24,900, supported by strong foreign inflows and positive sentiment.
+Risk: If Nifty fails to hold above 24,690, a correction is possible.
+Other LLMs:
 
-                let decrypted = new TextDecoder().decode(decryptedArray);
+Bias: Mixed to cautious, with recent volatility and profit-booking, but no strong negative signals.
+Medium to Long-Term
+All LLMs:
+Bias: Bullish, with projections for higher levels by year-end or 2025, assuming macro conditions remain favorable.
+Final Prediction (Synthesized)
+Nifty is expected to open with a cautiously optimistic bias in the immediate term (May 30, 2025), with upside potential if it breaks above the 24,900 resistance level. Strong foreign investor inflows and anticipation of positive GDP data are supportive factors. However, if Nifty fails to hold above 24,690, a short-term correction toward 24,470 is possible.
 
-                if (decrypted === "") throw "No data returned";
+Overall, the medium- to long-term outlook remains bullish, but traders should watch for volatility around key data releases and global cues.
 
-                const basestr = '<base href="." target="_top">';
-                const anchorfixstr = `
-                    <script>
-                        Array.from(document.links).forEach((anchor) => {
-                            const href = anchor.getAttribute("href");
-                            if (href.startsWith("#")) {
-                                anchor.addEventListener("click", function(e) {
-                                    e.preventDefault();
-                                    const targetId = this.getAttribute("href").substring(1);
-                                    const targetEl = document.getElementById(targetId);
-                                    targetEl.scrollIntoView();
-                                });
-                            }
-                        });
-                    <\/script>
-                `;
-                
-                // Set default iframe link targets to _top so all links break out of the iframe
-                if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
-                else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
-                else decrypted = basestr + decrypted;
+Actionable Levels to Watch
+Bullish Trigger: Break above 24,900 → Target 25,000+
+Bearish Trigger: Fall below 24,690 → Target 24,470
+In summary:
 
-                // Fix fragment links
-                if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
-                else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
-                else decrypted = decrypted + anchorfixstr;
-                
-                contentFrame.srcdoc = decrypted;
-                
-                successEl.style.display = "inline";
-                setTimeout(function() {
-                    dialogWrap.style.display = "none";
-                }, 1000);
-            } catch (e) {
-                invalidPassEl.style.display = "inline";
-                passEl.value = "";
-                submitPass.disabled = false;
-                passEl.disabled = false;
-                console.error(e);
-                return;
-            }
-        }
-        
-        submitPass.onclick = doSubmit;
-        passEl.onkeypress = function(e){
-            if (!e) e = window.event;
-            var keyCode = e.keyCode || e.which;
-            invalidPassEl.style.display = "none";
-            if (keyCode == '13'){
-              // Enter pressed
-              doSubmit();
-              return false;
-            }
-        }
-    })();
-    </script>
-  </body>
+Short-term: Cautiously optimistic/upward bias, but watch for volatility.
+Medium/long-term: Bullish trend intact.
+Monitor: FPI flows, GDP data, and global market cues for confirmation.
+
+If you want a simple answer:
+
+Nifty is more likely to go up in the next session, provided it breaks above 24,900. Otherwise, expect some volatility. The overall trend remains positive. 
+          </li>
+          
+        </ul>
+      </section>
+    </div>
+    <div id="content4" class="tab-content hidden">
+      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2 whitespace-pre-line">
+          📑 Reports
+01-06-2025
+Indian equity markets face potential headwinds from several international developments currently shaping global investor sentiment:
+
+U.S.-China Trade Stalemate Impacts Metal Sector
+Metal stocks declined 1.3% amid stalled tariff negotiations between Washington and Beijing[1]. With U.S Treasury Secretary Scott Bessent indicating need for presidential-level intervention[1], prolonged disputes could:
+Reduce global metal demand
+Disrupt supply chains
+Pressure commodity prices
+Reinstated U.S Import Tariffs
+A federal appeals court recently revived steep tariffs on imports[1], potentially affecting:
+
+Indian export competitiveness
+Corporate earnings of export-oriented sectors
+Foreign portfolio investment flows (FPIs injected ₹18,350cr last week)[1]
+Macroeconomic Seasonality Pressures
+June historically brings heightened volatility due to:
+
+Factor	Impact
+Global rate decisions	Currency fluctuations
+Oil price movements	Inflation risks (India imports 85% oil)
+"Sell in May" effect	Delayed profit-taking observed[3]
+Morgan Stanley warns these elements combine with domestic challenges like bureaucratic bottlenecks[4] and income inequality (only 13% workforce meets tax thresholds)[5]. While structural reforms position India for long-term growth[4][5], short-term market movements remain vulnerable to external shocks – particularly from energy markets and developed economy policy shifts[2][3].
+
+
+          31-05-2025
+          Indian equity markets face several international headwinds that could influence performance in May 2025:
+
+Geopolitical Risks & Trade Tensions
+Trump’s tariff threats have heightened volatility[5], with potential impacts on India’s automobile (e.g., M&M’s recent decline[2]), pharmaceutical, textile[5], and steel sectors[4]. Reciprocal tariffs risk disrupting $118B bilateral trade[5], though India is pursuing diplomatic solutions like easing barriers for Tesla[5].
+
+Global protectionism has contributed to FIIs withdrawing over $15B from Indian stocks in 2025 alone[5], exacerbating valuation concerns (Nifty down ~14% from peak)[5].
+
+Macroeconomic Pressures
+Rising U.S. Treasury yields triggered a 644-point Sensex drop on May 22 amid debt ceiling worries[2][3]
+Corporate earnings downgrades hit a five-year high (0.3x upgrade/downgrade ratio)[4], particularly affecting export-reliant industries
+Currency volatility: INR weakened as foreign investment slowed due to growth concerns[5]
+Sector-Specific Challenges
+Sector	Impact	Example
+IT	Reduced global spending outlook	Nifty IT fell 1.31% on May 22[2]
+Metals	Aluminum price fluctuations	Nalco surged on strong prices despite broader decline[2]
+Banking	Rising NPAs from trade disruptions	Nifty Bank dropped 0.58% mid-May[2]
+While domestic institutions provide some buffer ($35B inflows YTD)[4], analysts warn sustained FII outflows combined with expensive valuations (Nifty PE ~23x)[3][4] may prolong correction risks until global uncertainties ease.[1][3][4][5]
+        </h2>
+      
+      </section>
+    </div>
+  </div>
+  <script>
+    // Tabs logic
+    const tabs = [
+      { btn: "tab1", content: "content1" },
+      { btn: "tab2", content: "content2" },
+      { btn: "tab3", content: "content3" },
+      { btn: "tab4", content: "content4" }
+    ];
+    tabs.forEach(({btn, content}, idx) => {
+      document.getElementById(btn).onclick = () => {
+        tabs.forEach(({btn, content}) => {
+          document.getElementById(btn).classList.remove('tab-active');
+          document.getElementById(content).classList.add('hidden');
+        });
+        document.getElementById(btn).classList.add('tab-active');
+        document.getElementById(content).classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
 </html>
