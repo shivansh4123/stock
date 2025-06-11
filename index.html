@@ -1,306 +1,299 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-950">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stock AI Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .tab-active {
-      background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
-      color: white !important;
-      box-shadow: 0 4px 20px #6366f17a;
-    }
-    .tab-btn {
-      transition: all 0.2s;
-    }
-    .tab-btn:not(.tab-active):hover {
-      background: #232334;
-      color: #a78bfa;
-    }
-  </style>
-</head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
-  <div class="max-w-5xl mx-auto py-10 px-4">
-    <header class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold tracking-tight">📊 Stock Dashboard</h1>
-      <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl font-semibold shadow-lg text-white text-sm transition">shit</button>
-    </header>
-    <nav class="flex gap-3 mb-8">
-      <button id="tab1" class="tab-btn tab-active px-5 py-2 rounded-xl font-semibold">Price Hike Prediction</button>
-      <button id="tab2" class="tab-btn px-5 py-2 rounded-xl font-semibold">Price Low Prediction</button>
-      <button id="tab3" class="tab-btn px-5 py-2 rounded-xl font-semibold">Nifty News</button>
-      <button id="tab4" class="tab-btn px-5 py-2 rounded-xl font-semibold">Reports</button>
-    </nav>
-    <div id="content1" class="tab-content">
-      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-          <span class="text-lime-400">▲</span> Price Hike Prediction
-        </h2>
-        <div class="space-y-4">
-          
-          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-            <div>
-              <div class="font-semibold text-lg whitespace-pre-line">01-06-2024:
-                HDFCBANK - Stoploss: -1%, Target: +2.5%
-SBIN - Stoploss: -2.1%, Target: +3.2%
-DLF - Stoploss: -1.1%, Target: +0.63%
-              </div>
-             <!-- <div class="text-sm text-gray-400">Expected: +5.1% today</div> -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>login</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #dialogText {
+            color: white;
+            background-color: #333333;
+        }
+        
+        #dialogWrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: table;
+            background-color: #EEEEEE;
+        }
+        
+        #dialogWrapCell {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        #mainDialog {
+            max-width: 400px;
+            margin: 5px;
+            border: solid #AAAAAA 1px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px 3px #AAAAAA;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            text-align: left;
+        }
+        #mainDialog > * {
+            padding: 10px 30px;
+        }
+        #passArea {
+            padding: 20px 30px;
+            background-color: white;
+        }
+        #passArea > * {
+            margin: 5px auto;
+        }
+        #pass {
+            width: 100%;
+            height: 40px;
+            font-size: 30px;
+        }
+        
+        #messageWrapper {
+            float: left;
+            vertical-align: middle;
+            line-height: 30px;
+        }
+        
+        .notifyText {
+            display: none;
+        }
+        
+        #invalidPass {
+            color: red;
+        }
+        
+        #success {
+            color: green;
+        }
+        
+        #submitPass {
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #E7E7E7;
+            border: solid gray 1px;
+            float: right;
+            cursor: pointer;
+        }
+        #contentFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #attribution {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        #attribution, #attribution a {
+            color: #999;
+        }
+        .error {
+            display: none;
+            color: red;
+        }
+    </style>
+  </head>
+  <body>
+    <iframe id="contentFrame" frameBorder="0" allowfullscreen></iframe>
+    <div id="dialogWrap">
+        <div id="dialogWrapCell">
+            <div id="mainDialog">
+                <div id="dialogText">This page is password protected.</div>
+                <div id="passArea">
+                    <p id="passwordPrompt">Password</p>
+                    <input id="pass" type="password" name="pass" autofocus>
+                    <div>
+                        <span id="messageWrapper">
+                            <span id="invalidPass" class="error">Sorry, please try again.</span>
+                            <span id="trycatcherror" class="error">Sorry, something went wrong.</span>
+                            <span id="success" class="notifyText">Success!</span>
+                            &nbsp;
+                        </span>
+                        <button id="submitPass" type="button">Submit</button>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+                <div id="securecontext" class="error">
+                    <p>
+                        Sorry, but password protection only works over a secure connection. Please load this page via HTTPS.
+                    </p>
+                </div>
+                <div id="nocrypto" class="error">
+                    <p>
+                        Your web browser appears to be outdated. Please visit this page using a modern browser.
+                    </p>
+                </div>
             </div>
-            <!-- <button class="bg-lime-500 hover:bg-lime-600 text-gray-900 font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
-          </div>
-         
         </div>
-        <br>
-        <br>
-        <div class="space-y-4">
-          
-          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-            <div>
-              <div class="font-semibold text-lg whitespace-pre-line">31-05-2024:
-                DLF - 7%, 6%
-GLENMARK - 9%, 8%
-HDFCBANK - 6%, 2%
-ICICILOMBARD - 8%, 7%
-              </div>
-             <!-- <div class="text-sm text-gray-400">Expected: +5.1% today</div> -->
-            </div>
-            <!-- <button class="bg-lime-500 hover:bg-lime-600 text-gray-900 font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
-          </div>
-         
-        </div>
-      </section>
     </div>
-    <div id="content2" class="tab-content hidden">
-      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-          <span class="text-pink-400">▼</span> Price Low Prediction
-        </h2>
-                 <div class="space-y-4">
-          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-            <div>
-              <div class="font-semibold text-lg whitespace-pre-line">01-06-2024:
-BAJAJ_AUTO - Stoploss: +2.9%, Target: -6.8% 
-HINDALCO - Stoploss: +3.7%, Target: -7.6% 
-HCLTECH - Stoploss: +6%, Target: -9% 
-HDFCBANK - Stoploss: - , Target: +3% 
-RELIANCE - Stoploss: - , Target: +7% 
-SBIN - Stoploss: - , Target: +2% 
-CANBK - Stoploss: - , Target: +2%
-               
-              </div>
-              <!-- <div class="text-sm text-gray-400">Expected: -2.1% today</div> -->
-            </div>
-            <!-- <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
-          </div>
-<br>
-<br>
-
-        <div class="space-y-4">
-          <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-            <div>
-              <div class="font-semibold text-lg whitespace-pre-line">31-05-2024:
-BAJAJ-AUTO - 8%, -4–6%
-HINDALCO - 12%, -7–9%
-HCLTECH - 10%, -6–8%
-RELIANCE - N/A, ₹1,530–1,550
-HDFCBANK - N/A, breakout above ₹1,980
-               
-              </div>
-              <!-- <div class="text-sm text-gray-400">Expected: -2.1% today</div> -->
-            </div>
-            <!-- <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2 rounded-lg shadow">View Details</button> -->
-          </div>
-          
-        </div>
-      </section>
+    <div id="attribution">
+        Protected by god
     </div>
-    <div id="content3" class="tab-content hidden">
-      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-          📰 Nifty News
-        </h2>
-              <ul class="space-y-3">
-          <li class="bg-gray-800 rounded-lg px-4 py-3 whitespace-pre-line">
-            <span class="font-semibold text-indigo-400 whitespace-pre-line">01-06-2025:</span> Certainly! Let’s break down the information from all three LLMs and synthesize a Nifty prediction based on their findings from reputable sources (Investing.com, Yahoo Finance, Bloomberg, Reuters, TradingView, Moneycontrol):
+    <script>
+    (function() {
 
-Summary of Each LLM’s Findings
-1st LLM
-Market Trend: Mixed trends, with some upward momentum (Sensex up ~320 points), but sector-specific declines (FMCG, Auto, Metal down).
-Technical View: Resistance and support levels mentioned, suggesting consolidation.
-Institutional Activity: FIIs and DIIs were net buyers.
-Prediction: Market is consolidating, with some upward bias but not a clear breakout.
-2nd LLM
-Market Trend: Mixed signals and volatility.
-Pre-market: Indicated early gains.
-Intraday: Opened strong but faced selling pressure later.
-Prediction: Volatile session, with initial optimism fading into selling—no clear direction, but hints at possible weakness.
-3rd LLM (with browsing)
-Market Trend: Nifty closed lower, broad-based sectoral selling, weekly loss.
-Technical View: Resistance near 22,800–23,000; support at 22,200–22,400. High call writing at resistance, indicating skepticism about upside.
-Influencing Factors: Global headwinds, profit-taking, cautious sentiment.
-Prediction: Near-term caution and downside, but long-term bullishness remains.
-Synthesis & Prediction
-Common Themes
-Short-term:
+        var pl = "kYuKix3JatQHAoCPR+Xxc8cMWmmQ5q2A/R//FS9WnjcC4dk6dRGdo77BrR+EFAaalb/j7WaA2VzW4bFuifyP3ROOVHBcO1ZkQ96m+rtqhDVQp+gJfpD0PeqjSpB5an9GXYYMu/jvWHWeO3L/Zbei9ixYWxYujQi0Lyiw+L0Y3Q8OJlRSYsKMwWeiRmUJSIioiPsGRHI1QkLJJVDhWYod8qw8T2C6WVqki0K1rs8nxLt9uEYVi4CFcPWvKVt8vGWp6qQFKns/rxEYoaN+Lr+nc2kjILc6CXtT1GM30KQUiVkvBzxq1bUFkQ7KvGBfS2/fqQ+tdEM2t0SK3x96doc7xRHHo5AW9JsVN1m8i3+F4RM7k8ZCGZroO1PedbOblCh4T4fUCggLZCcJJNCpJkCgmT/4RKKEFW1VnJXktHYhebT10VOwrXkhmVske+QRJsjsokMh4JTyoEcdgj0hq67MGAzOl8xNq7X/PG52l/Y8XGEu2BRWrs+71tMKdYQzvQ4ctEzRusNAiQKriiews4PIF8iYh1fQKD6I5Ku8HbzZn+A5LbG+waERV17B+cvMUC9RMypl0NGsk765McncGgXj2H5fTlEmkjYq91KvD4pwNjcZ0RqxqDFFRKfy/ceGBGkHkDtXQRY8hJ51QWChdR0UgnoDN+q549MgQDJkhwoXDK87gAHYFbretr7Fp5kAc5BIAQHY7ypK2+2KvKYVvmgWhPMtbTK8niRGV6cKvcoRf2TW2k+bMkr6TVRXZa5l0O2UKo31AvoQd4NXIm/hEPfbsLrnP8yZFli2vdxQ6wk9es1D+QOOkfU5BsJmpWZ3w1pQzC2EVuh3P8K7aqaZmh/MhTYXs3ztMWEfoUiVXXc+UMUC1ibWgNzXbRuSIU5qtuuionLTY+NlLJ8fQCvB4jCzQt4FngJGZ1ihbx/4amqhvteuM+FLSEgtjcUonfheheeQFykq0/eAKfLw4vig4BA6qgGbios/y8sdO4Ik2u73uQbW3KJyyCia7/kRM/KpjNQkSG/jyWqkMXVDklphwwyj7LnP8kRNxCU5xegm0fXFbqQ1a0zPpqKwe9mPWmbOplnQFoYE2J1NqQRzl0/FORdlgUa1vmF6pA4TWlXc9JkP6bcHggVEp25dGKG8qTpyFnDCWpaLVqe1UKBl6reF+0FmU7BOIthxg+w+2qfE6KZ+v8qU01W4q2b9JLRmyTJYoN1O7mn6Sip2NZZfyG4jzEI6/ZKnW9WfOr6zlKDSLw1/oGY3BsCMZmxsGncyAkRsXZ4j4SLP2DHvJ1hayANFUPFBTrEXjCAtxmSjKn1vGtEQDbre5wTdOvR5sJ7F8mAYsXN3zULHDCBvu4U+HTIDhwZRk6bC71AFzB28J/rRLoabTo5Ut19xRnSV5VZt2k0sZd1si5D44nfwpTK8MK/NBikOCuCjZRLMtKEVS9jnPgNjZfm7ZqgULmBb5cOi8Da7CHxbhPKXeKyjW6yeva4lZcjEGOzkyU47qyL8PnM48+FDnc8Wp89BaNm1e1rCfGwGzGnbAvhixIagFbbqx5lsCAfedRWAtGNEoZiZjPWow2GxB/Fu0QjOfvkaNSe+LyNrYU19CideVTH51j9Dj6HCZmAcHlYTtlj0AgZsfiziXY3pGH/ngaQc5EQG/rziGnmXbjmMEM3COZnzz1OiaEqgz7nS+wbgtesuuR11LWl6FLDMg5RMd9buEz+ZLlR0k0USb5M+Fb5kNJ9GIdO89NId0+WlhlTdOBFLEbS+w3Pp410jxt9S8DyuUaVYu+Ka5LBQBfQRU3s+EX4aQ7zLTmItKNuXboV9/+PgjmIIN/t3ZjYbkvHpiJYv+1+XuvyVw/NMt99AH/Skrzrai6KKTWzzz/h4mmLEPhF3CIZRRc2f4YbEtO6sK7jF9jkeOdUQNR+jgrYqaDInGYyijK8DcTNfLSBDxAPqg2DnDM56fiFdNtvp9dftf5wGgMMrcZYQjN0lUgB5h/okg7CCyu4lmbvfQUhuZ/+IvvHbtJO+JN7zFYhowJ/rTsBIrQJrod7objPL3AeTTcDuDqEQA5cSGbGYa/gbS6tuLxeusxrDwv41wHSD3KvdisKbDLPiQrYTYkYpwjDUioq44MOwaS+se0N+eFJcynadpfvw5Y9/tROHmutQQPjuBqUpt0FChPLksUJzBoGOt6iY6WsBbi0gCwK37GJOYSirUCnI/82gmk2dIhsxouvEEFA429kfHI9xCiKyypUNtg5vuoVsQCbeXG1QE4VuG7dNBejVv8FFruF/DKVTCE5hLa8BPn1cWi5SLKwlHAU5TNHw4+Err3DJotn930Ep+qE9wt/Q/H+5taYtdKYwBLKbWjXrecNgvg+QWMCDUDQga/z/GGsao3Y2vfyZNjJSF0d3DN2kFdVkiGtWiF6nCkE+C6BItfBhFiU0kt2BALCsvChFhEMVXvlJKNmpN6xDilUDdaJeyquW/HB8ylGH5ZzsjIOAve0Rln2LNSP80mRsgpVjWMy85etV9nIf0zNmPlE+dUUGtDExiyFjDmFYwq1V8YHAM/PdQLd4qRrDul1uON7KLgohR3+gKl6/uCVN6Yrs6yWoRCrz3jwu2B4Ip6NKlouMk0q/plNwRwT+wePmuRlz+kPH8FmFD1q04SU5ARiDMPcOkG5RdSZLQqx7otQYv0xsD87dwOtmuqRbfV2+O7KLrELzN0/831gpU0MXvCQmvxrdvOsxsRHcIA5sbrBPa6ZtbZ6tA9SRGHGNKwOOSHjN8e9/kaMAVEgpxW0hnkN9trMB6sipvFxLkNOr0G5Oq3xD/H975MqpkpMpdCWaYF3IDgovlYPZ6BQAhdpnlAHCAie8ye+BR77a53S1b9G976AAYCYF1C6ckJpEZ+XNSp9t09ZfA1plwpMXPWhh0r3Gj/Dg4FMTRNG56QG5DDrbiZxu4D/vKM3+deJvn+1OasKHVy+MggTQR7Z7wyN5Efa9MR/M6zT5+/vQp/XU5FQQp0Od3SkGZcKvQjACgbCobzTjoTA7Ryzc0mUR22LtqapaFxl4KTzV/jrUkEyEYtvqJI9lcSH0mKUJncKfPxPUVsLuKmE/8KNBKMAW3Jhw7uRg8AYtdjJZTLYBQRAMH8If6NsmPwvcGXASsdG/6I4dINRCoWpVage8Rf42V67YkfRd0+owKq/ov0PVwopFy5q2k864UWpS9BWQulLBXfUsEahV0kyFEpinZhCs6qvOiDBpGQVKX4GL/mXRG6A6L2L+ujZtHa1NrCH4sgdegT0jU5U+j73rVGywo3QeiFpGn5RJWDVsrEQkCuo0wAqZsGHButzgHBIq0YBdKC3aVTxxfNyF8DSn/YLnY0rjIoKPoVvxVehTGURweGJYnH1vCZ2+SgunuiLHKEI4Ekv9V+yX3H5IpCoTB7Wt9+bTmvkeb1+qu4RrvQ1uQfkbNLvRxmJJHeG4KhRZcjdpRgyRNtLez6a0gRPTZQxFPVEUgkmRQ1kJdFUyB6TbrUpODhlyG7tpTjIZmQtv30na3w9OpUrFdUQQKhc4HdyFfopdYKKe5Y7oqgyXmGtM0bgA/du+TjWVhxkZaC00ylAUcclRYtb0G1IslHAAS/aII/wRZ75Ir19FbBQbQP/6WIIWyctHW/+CXOR+eDWUHKTaWHPx8wN+BXdp2rDjZND03g5j81Vay6lXhfkLx9OcKvc2VFrrceez9RjjmOJUmvGHGHNDT0G0FIOT9Wp4AmNrnRk0EDJsClhFQtt7tbOXu1bhkS9uAck3D1IrDR/c2QYHVqoPIBBaqUgyjYgf+jle94+Ly3N6/H1gZNEYzEZu/6+vgcZeLbyZ3vasBHTD4or9zVYT/Ed/OUiUpB1kxc7UxIon0MohqLk9YZopDkOujExbSUpUlGfZ4LJq5B4+lcZSv5uIYUPVdF9EU7iiF7gm7ZyhQD+r7s6ODspZJGdPps8WeH7gp3L/WWWxMrKAFE+knYMYokfks9NAO5FQnaZnqQlL1eAJVG+w3++4Cag+WO1yeCh0x7dNKzOt6kl3YlmCH8y8wXcUpte0SfkH19mK6Y7l+x9H3hx5BLxjLwAy6+E9wMD5q9TtmOmXRl8SL4LA+PumCMsgZImsm+a7EyF/xBnVNSEqtAbyy4W76uiIxstZRG6CE7qrrcwSNZozz94/kZjKrJHUl6lZ2KZ/KMr8+FtkEhSE5TnU5mwNWg5HfujsZIC+waNA8eEzoc1qYOhofrnW+JEP8Km+0lVOIq5Y1BiDJJLcptlRL1tc0QpLaNBR7/dVGzpKsmtgfp1zuy67LamZwpodbdkMQTxKBcBvhlerB17/crMnAhEiQe5xH9yUq23kJvrLj+9624YrPis0mJzYY6jR8BW2Gb/Ik7ZErfyC6sbfcVBYzmGdwAnQCMnpiMYuhE/+GMpfdk3kReBvotaEok5Zy1zSlZte7/x2CyvB9xsXcm/70py2muvd1Wpzr+PYn56FCJRdd659l4VPlTxTZLjR6AQFUAzfiB3XCm3VGMtzi+PjYUNHU1W1K1PpKqV+J9NIfunFTNG1SAoIU6k2+rKhTnWAYG+zBgcobSulP8aKe7MK4b3Sf85V1ys9rYbaC6P760i9Qe/CvpjKN2xBudCbGIi1oouBLuhwrx30uEaVhfxRDZvQItIzAvbWAkMGpJ+PefaKNou6/+cqQdkDH5weYQ6QGSylOj09AfgNsI4TyBTYnkX5ddZWPWi4OSetJpAewLEI0B7sJUWyHFfAbClNEiKnJi/aAi0axWnGe+zfsUVu05DY8+nVQeg2jne9hDV6RSHpt5Ho3hllu7DeD6c86Nbfpd+egQCVj19fT/0jeTBxeEux+uPuGAXe8lE7HZscXZWnRCqDezWfkiXQ2PrPGHayVRh8Pf2ytr8BlQKnMneArESSR1MF81Day2GCA2Y7RNd5flw8WQeHK6KbsDJ9Zu+w1CpvnfG0+ZVKq23+48UEuTUPI89xhEBQUTNOzj5acFZ094cIJ99ZcV7nrvCbRkhD+QTJOMuTY8frvJCx7Z3kwzg2gK9rrOHXcATkv+A1uv43ARmw7Y+ax4f+NE82F+J7GDWXHKAL3j2CRZBpcBegHfF+EsDmToFMQCU8NAAB1zL0ODQD8hFLjhwh/fNrjM+cW1quZLfnc6grdgnhT/gf0ZtNhReGnl7AikIfk7xStIw53wlaaG043au8e6fof+RjDTPenqS1+9LY3b8O+Wuxs7RsITTzBtTz4EJjkveKQhCeeLDruIlpoTtlmTMmXkVeDrnwn+Ty9Z0BDhSK9dwfTd9HYjlOx4LlOKprApIbI0l/bbeWhrg/PhFH3VksCFvTX91t+/0H3ngYry/6Y7wHQpFilBZgUoQ/c527wPkp7WvUgVdgTQy4yw31jlCQyiBYp8zJqJlrkotJuwXFk6eeKuGeBBnUqYh7gL9ZKgzvDYSt3rUfPTPYK27ANXKyFgx3i27xsp2/puVg7ljsGFneyDkMkK3BmmKBRGXNgoYCC7M/9mpSXwLY3HmfGwjXuHQNoTsH2Q/fA6dSrxjB2WeCAOCDj2se+y4MRve3ySvyEZxa4kSHPbqTDCoYZQIyHaD9AScD8t4/lSeCT82v8ZWY7Jr74RHLxnB+yVZI2j7I2zmhO8dEnVulJBPXm7l+vf3sNXPSMeuY5gCpB90kVPeu3at9Dw138MGExwJS9WGJF/8urnNp9gTH5LQn5I+SirP/aViVqJY1pg56jol1T1QDIqyUol32zutyFs9rsU8re0+60I71alUMU6p80UcN6ixBJ+DrGd9hPwwvlgFPq19//+2f4TCwKQJFmMGnYUCdc9FuA1l4PoAILoXd3YWMNS4PIbxNcS0lKhEYl0okRPjjwPCISmUHUr7qtA8IKjLjfLJVc0D2yj8HTxDEQnEM4jOiBhs4D1b6/jWpaATD+knX+SjT6FmZSHKf7DjlzX6C1h/SGlR/VCVA9uiWK7eBK0iGAoE49KiQy88yyxDcxAOx+tiZjoSp9VMNSzVhCrBoZjYUq23NomPCjB9waGRLWju1yfIUKlVPkOzAbzs5DRB7ZiOs5dWN9Y2OdUdQCFugu+32IRJaPqIZAqpPfvcoLBI6IGYTBaSD7+Hj0oZ7K+DXAFPgSmcPG2YYA6YHP9S/VHDhbWQjj/T27RM3rxAdoEfWnbhnZTGVwMbb4HCQWdZGolJqn6JETsjE1bmJ3R7XYXKZaKEf7kVXpwowVNZVyXWVTp2M3F6dV0FZyTQOMIAr8RJB6BojqGWlUBqdVODAf6pHhe6of55TDgvMFsJ6rMsbCad4ALo4xxZy2c1+FFSEp0HphagfFI7nI2R4n7Wksdomtn1Hy79L3Pf3ARKSlOJMDTzwafx5mqZ3sPWxqwFf9SQMLScwiwysLnzW5h3p0WGw5kDTuVI71Qnfjp+weDeAZUISWVA7z5eSZ4vrloF/MmgdElQLxNcCWWdXXe8X7jCedPzuIP5faFLIO799ePTNaTnIcpEK5IaTMW1J5E25IEmfxTDjYKlQ/S8rYCCKKYWz84Lxg2d2KErFO5srgxSDXubOiRdFyVhoLpjlH8I6YgWcv12Ygpz2PflPpw+8/jHDgiqCY7pdgCCe1Z3hSU/ZduPvJdBE0HG/eyPjv32nA4JAmK/fW2a7U38UtMIOr6Sq/mlUy6crSk2ZAPXFqZAOoEvDYtkjz5rN3TScghirvMMl3BsKYC3Y2c/3YU/wKDr5xL34I1XtdkRqwAZwn6AFwHCDB1ipGVvX2Nf1HuWJm/jzJn2MNUcwvYINK1zi2we7hjX4NrqyVbIEukLS142Br6lAL+UrzuTm+ZLmACNZEBoSXtWbx6lvsYVWcpCDW9uDMcHT0j/6siAyUfQ3TRYVvSGySiEUOeHlSVdmprRP53Qn5jSKZjeISc7gntrI5OtGvR4jE13omEq1DbEBWF3NTZpAnwOcOVwl6UuNXItjhEyjTFHvN0mcU7yo9rqDnnxLWIqYAKLcInztfTXpmtSaCCmQ03ZcadYB296aSGUE7NP/q304Gx+x5Qbrb+iVrYP8EbLj747LPwDxmg9EIWWQMA/1gBuRg/oL4gk64OeEIJiD5u+kdUy6HK5b/R6bblzSwiW63QR5k4KFaLShbt7KE4nTfTb33pR8u6uDo0JITj+/e1XqW6YdXMG+6Ep7rWz086IcSeA7HwypvNXzYWYvC7fAhqok3REzVKpQWFSQCUo0l/GQnnpfDMIGmJWYBiFaSWNljNmqNXB+KBE65BDK78J58tBtcGoPj+dSU8RXOZ6SPMRu2cY3Gn53I4kQp9QURMqXoi0Ry01mSEHsORgO9kjvrgMEL8z4mRHxmMqFNrWNoINZ/3bBeXk4wHNHMSK0juIef+ElNZLVI9CX1zFon4eWXMx0ttY3oSOps1HFDZBk6rBi3LnD/9FyJf4ZIaslbxpykv/0xMc9RFVBpLpTVyFHZBFybdD7UGhzs0+dELeM0hBYfP4KkPp7qKUYevZCsFyrp0pLghij1Q8X7fizHvKmE3cI+fUNlwL9/t2KCfRWegf+mhBzNOxl2DSjdfaHYe1LRFN77KA73bmjOGh4iv3KCa9TFF6Dd+/jOaFKGqGpi0gtzIRYJSe10jmeHzIXNkkNsHLAnanQ+Q2OARXfRIi5CsCG8aX316tkGEPBPedjoToPI1tG2LTk9oqLUTzIeW/dM/dosZbGAUczAgtBNkLReQIKc6aVlqYegeYlIgdrX+yhcTSeAzT2q4+7PGJsZtNDNXeXa8taznZw2mkW9N3VpABHx6UchLpcusRVqjNFBa+n6qiGTi3FdH1yxdQAf0tmWesMAJAijC2P43kmtnvTBlIft1F3yl7duU/5oLA1IwsquuM1AQXWE1ZfSYBXIeiX7K4DnOjgLnp0rdbXMVeT3MfB11BwUWozC0ZYCkKEUTRa6toC5xg+8wNwTyI6Wi/pLZAeWxAdvg6MAX0pv+RT9KEpv5a/oRsOtY4n/u3UGwaqzeBIcP085hf0fxUkEBT0MNp+72sb9SCCy/1oOZ548qYXF5yIFHG2MkZTA0aKYowj+fXFAMlStXTUi9o9lCq8pBlQcHIUpQ/OkgnM36uMSn2XfnL7eN4kn/wi30JwQqOVUNyFF0E5OSTbtlDHdlzPKESo9WIO8mtGbp4PylXUhmOH59Qih5LHo+Yo8WIVy7A6kuFUyrPawjOLkv6NC8AVygUyyUk7zZNvzBS962VQIWHgr354HvrvBRGpQF023ljUJwYdM6LGHfgGHBEj1O4SUbd1I/djRvQb67EVkpimwO1YBvPkTuiYQyAWXOeW+ISHKIcXGh1X2BaCFTjBK3yAReECIO+HX34FnYE06AIiKnxyEYjtbxkYJVAAj007WmqzBLaBkAtxvWN6iZf6cWjA6UeVZveLIEdjBPnANTN9se/pyPUo4Ew+3o+GBRh79dKuDuhdv+O1WuOGzaYX2cU7G1/hpjTUzLyzyP6kFAouFDEhGKNvWb8ayeWQZDPM4sD4TkPQL4W3A79DqwTaCPKukjB4WkCjxE51bYLJUrQp8ASWc7CIVBWt3edY1KgAFGl6LvQi+lmINkY4OYcEAjE2WxjLh6reY+XGpOIef4yzF3aSbS7eemwjJSJg7dvIHAP5WjNHIg+PFGpnUp5bizKNhxFAzkNv4FzZM55Gvd2QFyunBKn4p6RQT7wnQn/6XDCnXUGiAGgWHFDzt8xZ+TVeXJMzhTpvI94iFQt++R5j+TRnMVk+3fFOih9QDGDtbU19jpmHByHHwymMuOOtjKHkMlmFibMGti2vaVYf9b1YfVeQMYye9zcsFeErD5d0tx5WkQ0D3YziiWY43Osx3fKgGrNy99mjJPDRg6N/45HBPwGI7Gkl2TQVX+g8v35Y5rzsul8oKmNaWZyVN4OP+02IfUbW/C5/vdnai0BZhF8IMINMQTWzjTLFVYYf4BQ9a+bGGLvK4Ui3DcY1kJNotdL5kf/XDdHvrVfC52yLlSsJubir9zSpzpDldT3uL/DFuhAB/LVHDO7s9H8WrUwAOFkpvZumd63PDcCaTsmqybgsNh8y3YBseOsTfq2hCjoOR3n7pfEYcyGqIEx0pRRK/i1dLLNZzaHCgElPqnhV1XzK8kBcYVnQCbVmjrWU/BCj36BMa2ILPVJyYt+hQrLhBEczHV4krXyuFzflz1RcuS9/jwjQ5h7PB+NzMqBxRG8vZDEofv1rsB43XOzlmjbP4AYuk4Uc1C9k7iwY/D/wtzKOfW15i5FoUBShoOsB0U4Sk+O9/3N0NIfqexVni/aI9GjFMAxFdwbeOtcTGi6xE285sYfAHVPFIi0CXrcVTbR+d/8CjBeW5xtWSUQJLYTgF20ixFSGBuTGWLJXGlDrMDczgANRJ2LiPqWqZ4lZRKNbdq5RjDrBrCaRcnS5rXcVPcR5DkicDiEGRfgOtJEe92iRagVWFaHjtER70psG3kdLuu5trqNYfIlrUqAEfSTpoDUo2CCfxRMUqk0JqOm73xdZaFYWTp+ySgXD0RBIbiQIEdUfTvvcOs0OFQH5eH13gBKPPrqcI6YnsPZ94PP7pcBOHoMsJxI8+IBdOUx13XOXs84q9E0NJVFFj8+eeEzd1VGUUYFHn/Btst9t0OOaAfNMkAWUnh9rrYnORqMd+HvOzhEZJdZ42csdvawDgAM1xnupi9CJZEbaoMy6qyXfUZvcNnjS7WJbbprwsPiCpzeLaoBwE0CXa4v5cyijDJaMTGoiXWYGASmhjpXMUScuHSefAPKHHhF5KcvxhcPJWYOtddVh7DDZ3EBngofQCB4xZkx9zrbIqeo7SL0vnWUHIIY0GrVGG8V9QB3NmECzCzGU1Y45H8clTuXNnzBCRTz1gtzf6QkYy+MkI0jSYA9Ct73YMJgNpH81MMatzwpGF2KzEiNcu5+IUsZZFoFySp2724cOdZkbe2CDUNXPKN649utmycGstVu46nFLiOQMKUIbvC9PhVB6vdGE3pQVZWAiPItNLrFqQzhaOlOF3Mscm1jtQVGYSTXGzwB7bM/t7omPmGK6hzk0hh3EA2efLiqd940uhzqKQDRL0ZgopYyhAfUZXRhzExQ+YHnzACA/45fxdtP1Kd7I8o9mK0Z59ubaTZyjh0IgH6yNwp+bY5k9nQaXPQ3ePiiz3ihI42lKsuTPD2p4XvykYAATIf94gdx1khAxWan/EPLWu29VWty8TdrO9OC/tc5g0xW9CaIWCYrMxyCX4gOqb5gVJQdL9MNdSstktYaRkf0HBbtutxJ+L49CAtYBMYXBqOfj8xA7/2wevy1hm82G3C93GfTd0Yvz3itKFWelsI4Ios8ZU/WrxWZtjUubKHOUq01kzm7rz6Rii5ru9caLcOEeJEBLkTZ2HqxkWfzrfn9OvRN0ajeA8WUDjmC8BKnCNZagWWoBzmj6bqMldEaVqMK18umKzAvBMx0v6RO1hshg/e8GJmqtiLQAzHW7Sz8+73pak62w+6DU8AHvd/ZBLtvLYz54F2YTmIXCE//V0el3iWsafUWjFZXeiQLeTWkk5bEKfFSnTUZZcfxaiT1nR87vZR4aFQe1VlhtXMe9mN0wi2uRABi212NIOqHkrW8eIEvGcgJ3NifnR5qfpOGUbM3eiJ3rjxvdgebI6I098XP8MtL5uV6Y4ZVro4O8oOpxm/ryKlyXALYu0OpoSoWezRU6Iav1IJECxTZiBBCePSc5idMI2HfUbananShpTKu0yQW+l4s36iMGWPVF1M8oD12SojYqkSMsPPry6EEin+s/OS5p1h2+TdZg79k7IGh0Mh87NLCfigaV0YMzlxxRa0xNEdQdbbqjdZZdDYLtZ87Q5gsBhsqvrYDnzeYmf53qQIi4ng6+XNOuW8kSKo34duCsenBV6ts5bwvuW+EONSgE759MV4Fxfo4WkICcryWGn24iwqWHEjQ2EThswMvOo5WqfnS/miqTuhIm7/HecdJhWcTzwjBuPk+mHXp406es2JyKpsEbWDQQVcYDMFqVxeNgeJxk7IC8rksOf8dw1i+EUalrZcTMwnV5N1KawbAWJLLSRvmSHofOm0xw9H3CsrmV11RIXUb7lRWqjwRjjWj7Ur+rYT6/COD9pzUb8Q7eCG+P/gL2DLJbTvPBdhXOrEawC8/XBRS+m4fmA8Ta77V/QmdhuQLg+kxl/YfR7hrSjm8dVL3LW2kH7ey99FRkU6MppZ/K4X1392wP3RfL7rwrXbZ7vfMp7bIG2aSZ6B4XfQq2NubgLIwKqnACl0HKYKmYviJFRCB6yOUX203H+frdMneaMO9f6SKqKe+HrUD8WmE9+Sq8jF+B4GujUCgjpQh0Sw5/ucb4+M3Fkk6r1lSk0g6aWwsRZOSIaqwtR9G/DEiGUkNYOp9U7ECZJQIKnTcJQuQuKfmVGJP50lOFwPYbhS9qhTWWL/Llh+JUtOz9uIfPzQiM51UIic3DhiwG1ovy1rDoeXqu+/XWPHwDTO2cTvySO4Eo/wDHJRyjS5t6Ko2qi804xgRE7rtJGWvMnLe8YD2iPvLJCax4fBJyqM8uK0EKJJulg5eG2/mOId1PrER2wEh8wD8qp6uG7Pw50YoKaEn3GPLdNMCIvVqbTb4TEgDUYO9loeypLiEiI6YTB8GT3ZmwWKAOcx4ujQxJvPbYlmZWgF1x1xGIt/qU9FxRAvv5bqQXVX9Odx4J2ZBH630y5XcMMJ7IJfI38KZPlWHhd3V/CCXSEJmif7YMzFXsbx2MXugJr+Isv6hi6pSYoxkhJiU4QQV9ztCAncIkTYQWpr8sb9RGFyH0YRV6t3Z0wgYDXy8veZFkDuPAx+7hmX626PDdbBsPAjdudjSOUhXURlD32YC7TNUEQxpO8zOVnPuuJTOuneVOhMdwi+IRhqQ6lxAKtf9mDutORapHlEUvsXgjHu5+YRKhEckLny2vtXE7dkYnw71Za5fjN6xLs5+RyzDuguDgHlMx/p0xZPmHOT2FbcgPxjqZ/LQWbj7gab0SXqDQztyGt5i15QrX4ek3f7KS6jeup+6eoQsigNWhY/T/0jVZ44nzpsS67yEVK3y9c4h93ngYQAKnItS0Qb2PP6fxFmi2A7zID193vA7Rhhsn1Bl/wxkODeMzGAJQmikv+Fx0Y4PXJCUZ6IFPXZohvOigx18eb6wwSxwiZPTRL8oQjMRo5BEykc71qkNhqIkuBi8EQqAU7fl/tCH6pdXzuV53LyCiMREw480br96z23SMlOoArzWEfpmhn+SldMfjkxkPvv4Vx6TzQUZxu/FR02eWPTKubNEq79HLmyxI23Gmb99/3V/IyotEtw0p9yPIGPWZbnjbXdwieXViEyjEmd4zOlQ0DPz3359PUubKn4Hf/UQ5lBGro4X2C93Vk9JPHrbtc8JK4yJf5LuHIj4o8lSyYF+CtzkSgA3MlIZNy6Z7qw3AQSH6EbsbGD4rVVpBRG2hsKP25qm/0IeCSlIwsS1IJLa1glXd2wgX1pAMvrV9IKPqm9aMUzJnAHSm7oRS9YyF1iTF6LaSQ9f7WF9ZuiDvEp7Ji3QVfOdkrE7HMrmnzNh6bb6OA4Ex8vTUYDVuTRzgPWy1zj/Xri31KX/rBL7aufPgRqhCozUC2Gfm2ZyXDQbeiMzacK8QKy4bKRfpafkyz7QVjJ9iCZ5yGmReNFNKpQEgx7r0MC35OQjKjw0c7ocIkXYVuTIeELj2nUpIvcCs+cfWAx7aafVDBdbZtFmrZBr2xXxqD2qTGss5ywC7LFdbTSyqcTAyN+ihjQNSlNHjLcVOtT/DMf2+ro4I37Lq/sFjK37jrVs9SAwSHGU6AaQNL2YgbUtagrzgXOvO8B8sWTU80j7yWWddqBzoIiLJFrjl+k805fFuiUpxWzm2ulOqnXhheH6CjFShQ4pvE1vGiCP/l2pIMG6XPS8c96+FiBp9v8byWIqsll93UZid4ySccWlFfT5dnDI/mQtpVtklGNIobKIp+FTPNhZX7KXZhjfwMzQMLMl6lD9K7m5QDT5/DpSbwjSm4OimrnftU9Z/PTYwJiInTXgskWBnx3z2AOMPo4Xb8XPT04dnmPt3QGJM2rF++fuUtBivUqnQDAm7JTvpalmswWCpZG/1mi1+bhIzG0KD7pJGu3n4dM0TTSaqcJ8zW3/4H3olbTZiPbqXC1sWJ7WK6e7xV7f2+r1QEq1oT50+6Nu2cORZlh8+tC/ScZqSvZ4vsWi6TZ3uPJZO0bmA+jjSmKrIA1UARzgUFm0ybgNARbOOF68d50iOf5k/63TjoK2CmcifHe8zkaS+U44OTydvDoHxU6B6/0IBFd21cJxOE1tl3fJFSo9pA0xrnW+CWZ833RTiS9gjTWXhOUnoRUXX5jBhgDn/H3ot9Yxq0OkJWIWAeIKH2iliU0QyqQFfh8qT8e2FxLaAeKJ5dqXPbmin2k1lLZYFY0aY4zsflrdNeOVwqiopsUhbCY4A4jlvkgECsW/Lfrtvk4QBOlQ1v50tDPNuqwsbFefledG6SLeq5EpePPCNcoYn1NOW7LHdrd5jEopZHTO9oS/yAfu+49UMpeiyR0ChH5r3lTPE8BnR81olFOLdVV7Nilf4D0HQMrCC4yPKALC5fRFjryFSjnDiph4cUKfbR0ZGzvPXb3ywAqVJOrGesHdPyBxB5CnmBq0b2WVFlxlYwPThcIzWRAPQBcR1KOgypDjQTZoMMoXMVchH3AWkvAelAfX8Cgj886c5WviIOL32XcoS9Lk18OqZUBVXimYm03NsDecWoQuHvmASv0efpgQFs+ufZxUQD4vqgNUuWMODumZ5Is1WppGV8TpsG0g6oMvtpGqdiIMEYyWj9++Yvkwt01XE8PHPIJDBuKwrDav1G00GdCJiQ6XHBuXabd0y7OAUv9d9cC2DG8WWVBsYCX2Frl9KCKB3S0RD54RxMv/bGvF+y6nlah27bMPQYZACKvkGy7CCG7PJoYGo9SRR6DCy2dlpBXYSpnVHr8zLTmXYxKHue2QjKrPIOROTbfs8anayYxMvzETSppCsAO+ShGVGHvWSm4bgsWimZ7OcghXZAuf8Ay2hByps74rCulNNkrpDiY3S9WjoW0NnHvOPGh2FWssHbVjqTtWqHIaE4R4Wr16F9wpq3jd0SkWENb5Fvjd5Va2TAexoSWzHZDulQ2Ixqo+miaiAa3fUGECEpGEdzSqG3UyU7JzzwoIAR1VgP4DRwXLBktNq24wKUQb9l8wjpkD51o+ab6/bB9eFvY94MeRGW92h1S6Q0QbTI2v+SjvhiC7YGgSEv58tUhROaFoeagEE9tpz2Gu+zKzDr/nL5sCsFTssHIVOhrRfX7Q4OoU8/SiKoEjNO09yayN6i7BSD2w9V5UwakpwwUODCagcBpZccfJ3wqb38L6WdHbzJqRjdXyK6oPeSRSt0mT/gIlfFtHZTEDLS2ICoUIC/1VIcrDXqc29pydvii68Mp3X1qxtoLE+9MAdXywTA8kNKg90rZUKMzosgJA7KHz+/ngmeYV1dEY1mPTaQHLx1fhQsCS8YhyJ6ltevgDI/e0+p9wbegRB/KGy71D8wT9p7VcS4uiURUAAbIWwoXXqekce1npwUODbHrn0gFlPKOmhJVHcKCcD8nOG8lKEjZvTbWP5pFD/jPD3pLH1PnHnkaKJ9QsiFUAHzo8iADEnLnryzm15EX0BL4I4+/MP4o+D5tBREqBU3E2ivr+hDk0/fVo4QJXNgoBg9vXG8f7towH9ql/8Q43Qw7Y/NLU/g8PVrnVdypBUOUF2byy0+rO+DBwP0PvAXnrj3Q39VfGiPjxZWTL9AO2F/IrF6pJEU13ujTmJ/3dUtTpvXGclDkyNrjKbfNHofiamJEP3KLYg8DtvWsi48gn3wc/1PlU9DPyDOHvBi/HUUJYkNL/qXIajrusjo75Y+EptVct1u4ljOshLcTgC/Iz4/tx0qh6yQZBMFviAwPRHbI9cTKlPDCGbJUG02tAxMutS3aO4AeH19vK3v19kf0Bl8HYg3bPMOUbrDrnxMGwgzPPJvjtbG0GT9oOU1DuqBJsfi/l3jm+EE9oWiyX8W166sIWm8wFQUnFxhAj+gLEApcb5RGPeBSjBEtfuXRuZ5L89L2nOP9H01eP9brh5LrxaLIoYPQmofBe37/+tQzZsAmpsuuc0ESDzS8gP0Vdx5/MWq5x5hd7MnnMrW+etylpuNQUGj9e9+9nGg3QYB0B/l2U5qSS6pRZhCxo4cpgP8/ocPO6YLQNHIfksgNxTOE2CV248lxVGkYbQ0XCo6Hi8LbPMr2/BnTP2xjy4KddBI+FzDACsI6tEpRBzKaM+poxhMOGZNCG4YebgYmSibD08Mgymuefilyh+8yOS9mwlVX+BQcbeOKSY2ILy3m+n80b3axzMS/Y0eooo2UbhirGrnmfCkEd0BK3/Q8HrBq3JZyA5lVMZAo6/8aQ8F+f7m3thokdoOajuT5bQA5UoAH5ixcPgggedvRUqLuKa9gAP8Z6D1lBSzkpHrGge4GGFauTXjPRxi+72AvmM2+gGNJa2NZ5iq0LaYiQg/IacoyABU60BD25OY4Co1rkQJC0qECc0VIVqALowr12mCnyEUWQUV2PrWRReLOuqtgC6JarqwzbDou/EFyuB4HmvPkxDGhw2lGQZOAFHTzJ90zKZrcLuLFSXVA1VcVFO7HK7fhPocNot7Y1GkzpJ9yE3FK4zVVGMAU41ZrXEoXe2i0sXmz+CjwCAz2y8QUZ6J5R6dFU8dTQGyoBhBnsyPVJ6Fq0+EtobihBZvSQEsWq/YyLJDZL5jvi1FXQXm3fivEyzyKNmyHntv+2N0bxPFn+oQJ1/VG6MxJAQY1w1+KQPN+wQno5tJCYNgr7sHAM+pnPTI7Ms9CZCc9AYDMqCSgN93ixEL2fieYufW5YlrIdGQLx+7dTWhe7l/Jtd1J3hx27Md72uSzhqS/bZb2i9w8z2lL9/FQy4VNt7HxrYjtklHeMWgFvIDfPdJ2bM1faRATUqYTPOBy9kP3/rDcNRlw91Pyk5FxUT2MK7BQykNGMe6RGTtabnpxvCIAcSL7Gj5iAIXTIUQiWh3nj+CtCARh/xmEho0y/YxO6ky1GeiBGn/OQPp7sKKOFclX2AC2Hc/m9WPYlCzuCPwpJQCecYrthFbph4qU7pFMc8LPoXnlDSbvs5/HMzuvgyzILRcp9GVg7UxH69ugQID08iufjlRL4HuR00+OxcpJjyqCJXZVGlBpm9MPlAQ8Z4zzfVBecI9Qj7dwlYXvoh9zz5erfhN9HnkbkpYAKsTKlIEq6nUD1pTemGYBNN4aRogHtw906gl9eVQSJHg3HeuFv7dxqIqAvAg+Tb6pRUauA9izhICInZtEboiuOzcsovmpGHb+gsZD7Y0XT8qSpKU569DPpvppriBFI7ZG4Hgg5AGUGXGtZNKRjkisJiLyIz2eXQAnwLpRYLIhg+H1++zRMEOKi7uDkl1kTFn6S27ORtf5hFKAjtZ0x3PfYuRf9PdWi4lVZbKKQQmyHajG/JgRQnZmWgegLvJ5CyjT3Pn216kfUz9+Es9fB4J6uXXK0KmhtcNhAKWmmp+oIbk6Lng+WM26iVgyyjLoHwcYij3qiXr+gfQC/I0u7LacWyy/UPqxu4uXSjJMuF0Ov/cRMqes3/qCdQbYqs9JFAi48tX0VxPE/U+1Z4uM6wMhDFZgIaY6aouwbZaAZxb6DuIJfLxSB2PBA/vYMKmkQRHu7xLak69+Bs6uhaaDAegeVddT6kbLrCsmUzcMGB0qs4uhL1QrQgzYonohasGnlmfChIPxFwDiEIoYGyFZcwmS6RthGse0Q+YVRphibWhU5f2Fa048HRkVjRUlTSUdgwsEwWMkIug0zEaPWC7o0RN+Pze1pJ7Ow5Ggksbb7bvdsL1uN3WQJH11zFhhLQ6QQYMVhcEmnwzeJaDsoPe+1ZuAcBBOUoqX0GsywW75J7BpGXAhM/7rL3Z9E3jw/kg5tjUy1LCur6DV3j8PwvGtIUfWTO94O+4Z+QrwYgfjsGDe+sMBSQC+1wTFLDxb5yl0D+h1AX5ZzvGXiFsnjuHMr6fEJRvSJSIVxpkEjf5xxpC70/CIOvfFjoaRl/ey5iOxZM2RS2026nf0mnPM1CeHX9YAvGXyMFjOEGVHTD73vTK54BNa0KGNoOG0o56/tDAe03DCtaZDS87+prLZHNvENDwJIPnJZwR1nDuLIUEWUd06uEgv9JS9Fcv4b91Py5Mn8OYBevxX8kqzjaUhquY3r74N94EedlUw9yuUEDNhqMqWP3mBwiQshpZY/SQPpWa2SoF4bLrQl7webAw/ZkLx5faMveN0G6kadbOzvlfd1N7o7uIdQ27eLYsGXkdDdZpsdEFgAr1UaxIBpqIyy6PzYiy2pKHs7Y+yapTiCtos5PpB1yVcgzpV9z7z0Ff5VqS1SM11+mPZdaPj+tUaAuae0uqex38bOGi38poVwegzzuzPxtT3sTcOmylmb7BlKiflid9cjArBICBv4X6D0s7JXU4KCJaIyX7Z49BhMw6m9tnM9AANhImduGXtrW8BhMEbhalQcy7JlQQBTvFC/lyKg6RTOysbV3CsvHJK+M18taOXEHcpphfKVCaw4nZpidtaCGvCSuq0bz4GJBA6cN7WB8HYheaagX5iyiFndL5Gt9bwarhZe/YJlrDsvuQCvcK95IeDmoFaGLWobv2YZb02AgyDS3y8IFmeIvPxptmlV9MjzOE//pMIGhdmX0B/QppfzeIRQWT6r+lzXZRcMynyiaBlk9xBAO3MARzYQ5Bf0xQasDwy+LkHO7QdUCZsImNgAuEvNdbIt8g4vIU18uwYj8n2xPTtNk4wKwv8B6pt9okr1W99kWcbvJFvDoGHbWymjwvI1d+E8TDSRPzljPOFvTygZ9x0ISu6U5NN8HZg/girINNvuk+FB4F4SHMBw+qGCSE76Hh1RF9RtD3KKvt68hlh8Bb7vbnoOyV5aXXk67a6Y9xjxJp4Zfe4d2zNO+ZYaTD4UbEGMYSKJuuhYqJKjD82dKeJJJun8IeUBbuCBNuG7CY4uEHJcv7fc/35SjRg/QWctBVEBrAXIATsN5AzzAEppwQQ4NLF/VmzJ/QML8RyRfU2ow7M2SyzrLLXM+kAHmFXZdR+JUWbxL6YhCj1qDBGtYQp5zysdzeKmi6OYC1WuMUZtaQs+2BntmL7RGPQcpxgxueeOvU9PojlPUGsg1lpMwRWcvTnoUgHTsxc29oVlDemuVEzhVxAdX/JFi0qIK2adiTBEq4gpxL+y2zh1B/CNISO3qgC/XPkGNc1o1vL5oMegdmqPNO5HHW4n28h6w1JX9rIIDsCKy3KFX28rbCY6xYNTalLH5iXMpmwd+LRmpm0as9vjBywCJzkOxdiA90X3mV7wvus63KXzXf6f0NRH5ORsAObCDPubInuB8HtnVfIMUeg8JEGj5NT6FBeC7Za68NiJE9P456c8UC6TGUPGlacKMgENNADSs7/VHJsbyorbBI4HBWkUlXuuGuzuNcuy5l9eCO2TtJ4bbJaPXV0wsqAcrqLWOzUOGkFWtXaq+AmJAjUmWfIoloKaj5y6W3fCtXyE/AUwBn9eYAHq3FOE/+Mec5qb5hD/HHcub/AZfKM7FJeeEcwAI7mKANwSyUvYzILMfammnH8H0hCFI36YuqFFF9huWgrZwsM1HPWR7K8nuqEOfwkI/oBARQeRKeqooQdeuck1SZ2ZdZfLlt9gFVIH0mLWk5IFfYyhUEASW+inH7kzUYfSgipmpP1vVYtlZFQL3OKLipjboh1pLh6ym+RVxHxmIyiOYC69/3KKyAVB5V3zTcieGlrHX0JGRRD/pDX3S+ChmJp2a/3OyVWBJ4wk8ffHO1t/oJd8rXTM0gZGUKS0JUM87ilpBHxvKKTZowAYwQQOnsPQQZMgRkANGyT9tV7yRLy6jLB5dbuvARvjH88IgRfxlPcsFYDQS2bxqydDt0WiDf9rFmiT1wQDIxFZjvUK1uThqeK8nW2MDdBDUT85ido/42dVpDhK1W+oBmnIZlBPAfAGAMPTLbkHBR04JHVANBB6shluNCxEcvVdkOHk9S6xl4PFHd5pcD5ZjI8sWfTEmzMQKCX69O1kqejvanXVh0chDmwXDMYXMBK4IxutjX423K11wFX0lD8F4A1pvo1VjYR88w/aeeuX73Uk/T4NtB5DT2dJUZdCzL+5zyjVnGsSdJPrfkooS/W/0dS3TYXSEJL8EePJ4CYZwmoPikmLoixXA0xkr/Uz6M2eQWIpPxP6JQZO101mXR1Ccl6vsHB6ikVZodhlPE2j7S4ahaRaR8jHtwns5hBDERzfORUK9zDDWVPLFJ8jqe0j6x5zyc09KtNrvJyrekDjqUV9ep5CiaJCNHjKPzABWttpu950/r0+McTWmJwHWsPmx7xpVZvV+Sc9N0UmgbS2VDAOris6qdX6PxgCxAX8Cfy7cK1HFCjjuHrOBXNFgy//emCCeivMuKYzh4z4UyON8QViDZbgLA2dVztFnJ6uXq7X7vTbkI59dHtlFTd+OYs2JrYxWc7HR1DJm6u4/zFlpuj1f+P+ETzUmV/BqXvQEgIQm8sZttXYTFJ10LqeThEmjpvBCf9vZ6E8XSKMV1Qe4uVvR4qXDYlbtiEppJj4CHn5PF2Ju+RduqEVLt9bpY+fV43yfo2w5bCLL9IFlXJhEC4xg2O2BAzbg3yAhMJOzIjX7ZfgyTFrbgaVJNgt0OCjpQKDg1A++P0/MM9enKTVJe6aPibc/lLJ6zk3iUixpmEhgDZOrNGOd5Oc7huWb2ZET8Z6PT1uixbxaM7nO0ePu0lCgLe27/P+KXilY3rl0m9Vkap4eYjbRSQDL7H7nEryli1r7JtyNV+kgN3QAdrfP8DKEpyYLK2c6mxZuVLMuJ5OdjC0DotG5t1s8ihrNQdoruA9iswBCVqJco77JLuaDzaU7+sKuCBMU6uB23D9v2hmWbHoGkXesJaH71juBy+52s5MHzNoTS5l4aGp9HjpLIHSbVzniFbHq/QFENW1tcOLvKc5nlu1BmUCk6o7fVHnqEg4n9bWNhgvtxh6vJFH1wpdkLNzlCfhNQr1tw+vQLLpa4quYXB7UIL6s8czUMOtASIH6aS7fLrj+AIiBClKYYhAhIguVIdqJqUZfmn7xQ4nUTULlufzZQcvnSjQHkxtUpQaML12+rtM+zbFnMMpAuIbfSfmomO0JKc/LpY3+8nJZlMq5DQbZ23i7LWmNiBJnM7JBYngUXwqyzc98VaeNt/RMyalybAXlzDzkYgX4LW5HU9TfjF8N7VPfnc+PmeFCrsUza+ZejN193vNnXcoA4yjsKssAXEPNtyLeXUSqw/6MribjMkhPeu46KUrVsnOstwbAZ1SrEafxjS2j4ASC5vU2BhCWVgeSXdL1LRmp8uYimOxB2FF4PxM5TKaUe0UTOF6mnILUG1JkH+vQyzXO6PiF+Iivff63t8hBCiivXdSicoYHyQInr6c4D7pvlgosIa2q8IiYaOfamdVwnrvvGFgHkxkYy50BWzrG9GdZLIY9nbzqRJEcjguzk+z8moAPO3+5v8nSURcoNAiUQUWlfoKoRXkxZ9qb/HOnbTJxTFM+dZryd/2qjF5ErAeKmATGCaBWU2p7Zj1REuhTDs4+TZEOyh8L4CBcmCwkyh4GA7rqZCYxPzECqEDhD1t+PbVyXqHUcvk4RedIvOZXVHrrqAN5ZMcJjcDt1S5G3lPpYMwrA8qM4Qf9tyxrSAesFVD+dIeZv4Fj9sX6WiNMOb8/fqhNmN6WgkyizkxAzU5q4npeVsITUUa8zsOC92Eoov23gCNQ3baMWiTEO/AXK2dYfzmKXpJKaSEX7UyFwy2owGiRp9odYRxj8pUvTKqlrOVtroUtctcsO9ZKUQuX7UBrxeAvSuOxzswCjidS53WltLosPXrHJIKvm5bJZSIToBN1cPjYjACZEmPTaPUQRu79YCKDmvydh65/h7N/78QBLdAbhXM3tPGurt44+f5kZVuTOuHLNZIG2hIMN6kSkkVC78OyBn/Nfyr9lVFBYCLvZFXDwS8a2kEYIkVz0oIPu69szbMWS4YJsablu+Wutx6Ltxgw5zVNiOAiFDBtVpIvc9faFJ5KdDrssBkFLpUVgTZxAcQLzXdhfeZhx5Aqyb7QhZ9YC/J0xbCU8HjH1dUCnxnU5sWqRzoa8XDJh6mRzbLrsBuBEhO8SM8hW7wSQedkSA1lt2LdIAomlc4kbOkNCOI2oXuTUsXfnuEpnhVcFfHl6oI0J77ZOxTKZxhGUxlk5zoBbq99IDo/PMErQl2XriMaIzXAAU7ioSGvOtX5Aa+KjV+gQ1pis0CQXgljX27Ao2dW6pv0xneX3Ob27qFQJYYeZUUMVa9dWhvJbgBCh9vsqEvdHxYLkNwrVXfaJUnAg8Vj/FZ3g8VriD60P4/ubgXgrRvk0MHRJN7gg+tvnFnxZ9B9gYnt+UZF5KwC0sx91IBlUyDNMbT4m7N1w1iWbgw7OV4A0F4DfSVLfqviFhCvaFJHSNwr8/330tE1Y5mik2N+zLUEXiUL0XxbPsZv6V00uKukJBVQtGbtIF+k3XabSy2l9Mp5zDHp2kCT8sE4S6miSduUl0uqxpxD8ZBm2Vj4ciol2UKO/VZVUOD4eSASaTzOMgOjsli1xLQ6CG6Ld2XedijfnA6L/4ZkwCcpILHfxZnZod2b9l+szmOIqIHZxBIwdYVAPj2XbdehoS/JOR0Qf6Fng+OsqbLCuRKWaaXcs9O0Se2MK/1kdncfGPP24qZVJwgfzCP5XTPDZ19KhxsDESOVVB7IGHPg2WETCuUx1ZwxeDfUafp9vKifu4//Dnyl1H7a+z9+zVXel/RBCLhIqUdsGf1QinhMKkLHJEW8sBScGu1uI2UNRpckjyVJiLergvac6sHXsqu90Pd7FvcxMkcVI13L9ZgwFYbKbdtCSfKasplQwDwUVPpn8pl8HsxjJfZm0aAim2MWUGJkddfZmuaP+9bFCpRmcxu1Ru+aZqPVJTQ56yXYZIASg31LfN6ef3YqHmkfdd31lTvtZVD21nIlOsfAOmZTvBbA8UAp/ut7flgpWU+zH/K+LAUstkUMhWYcl0188IQptCk54AN0WJljZ3ydt5PCYIKXq2cOWg+pxnrgqFVJiCBfNStoMDfvFkSxRbo1CAF+Etmwjg3GuitW2qayhBcesFXL+6Hu5YlyMgHfHs+Tka8SHLdlipmCbE1447Jdeh3xGRGGmQpb6mT8EUSVuhljVv2Yn5PS72zxLCOaz13/HWbnTWdHTrx6bIedkrrq5wiMlITaLL5fsLCgvzgiaRxxygjCKyP4dxnC+Y+PIgbwo6V9ZCenyBShi+v4mTR7EvRqoOL8W2aEQZvaVSLyOOw3oX8xJWFdmEvxpQirlvdImy7xUyakePp1NJYxPPcMpwvXbD/g/dBjRVr0DHd5FZ92hvwFrfFpvivw1rtjxmeAj6NX07yE6Q+ngvugegj1NKZsbRcfa2TPcSFBcMP+ObMNnWzG/wIqZq6fJ389HXPZ6eigvLc3GjSwnWzWoRx+Bjz3wH0EXU/mTAwUK/IgNqxLtm+h745SI3L9nbWJR+JU4GzVgaV9IPvjgD2YdRLja3yL8X5aoJPuDq1I5RcWkmIWo8Mbz925e02NVCGPn6q2oG/2d4K3HMj3ViAgTgMIHpnT8LREb7S0ZXQcQYRRIGg/kpCJVByCj5dO7RaYxQYuRvCytzLLB6jwgIKlsyeOxXtACO7+KQ5d6+UafuAqCk3EvVvpmWf9YiE7oZZWXfVh8UKDNh4gj0Og6TlSPwgcHaT1Ep3Oghi2KCCvzfOs+arhwKZI86S6PGeG1kXrQogjGcoOTyYwj9HkCt+5wY11KbqITUymd90u0rxrPI/aIhRA1cIdmqoJbHmB+HCKDjRbp9flXGfVSAwLVlzUxHcBOyZeLKMhAg0avutSbPFmQFnF9eURMfH5gPkss/IXJy7jKHAWEc7s+IBrDocux6QkIX6xCRf13uY5IM15f4iaG9zKNhavaE9ULqF+fC+gr2WsYKVNV9XVn/dPxe/h3hSicEyma69yUvpYLGFVb7KoHNRN0XH+eaHcVGdGsp7OLq4o7itwBtSTIWLAgLyVG4bB7SsBLuJvM7g6L/rsgU3MEsl1QeaKA+20DM80tXXoxth3JE05In1xLmhSq9dINiGiuIw6BvHPS1x+0vlYMt6AZEGHa+m58JG8L7EZiiqDts2NXOGGtqALmpoXyYyWOOtXzLMyczEtXGeZyShvPYcMzCJMd1EvSSMBHSgVyckgrzh4EJQif7/3JcNvji9Mw6NwvdHsFYnt/NokFpnsDDbaNCOc0QYtPUJNzMtolK1sDK4LcZjvF6vYVtYNcsBP+M5NCwyDUARuODGTsqMzr9dGmqO22JHM3TJScQDuvp4xiiolIzfrlUcNKDxX/SYOty3shh1jxvOvSIHvftfQqJYpiwc+WEo0BTvMDndn4Kc07EMNuFSj/WjEd1dHrQ558tsyDHDX8FYfEgWlZUDkSHoAvTeftU0RD5HyaFOMymERrCu5bJDPBFgGCrueIyx+XsVqfLiBYaAG/iZ7LUebvMgPt0n9PHNm5056zegNsEfQLHDS7j5x+xZTzriKgpB1UxTi6TytylTnTkeIWr7VFnQx/9vvk5cKWvVN6uvldfcwn3AnUglR4sFCFSs04kU3OZcBkWMM4+MlhcTL7CLWNdSM9IMYOJYi4L30YB5scDdEuuRC2nqUnKikqAUz4hRl4fHlHzVURoivP2e/h9Zpme5ExghFLMSSdzEFoa1HfdUH3JVgPWOC3qn6/W+5SZSXip7L3LOzthTzO6ex+CC5EtAVZHqjhb1aKYW+7Oudg2ZyMqcRj2yt93J6AshJYhZ+YwwdDaOUBh2eWYRyPzbGUBUCE6Bc9ysdVMno8AiEYkGQDxOcvZpupaL6XacxjbSLKXf9g6IZc7OqwG84c5HUHdADtPULypV4/Yd0cjQNqeF5HLcjT+2A2j9XmHPGSplIfpVfcJ8H3VFrLwgs5ISjRooTKgSxm7nQOOu06GQErjaWlZ0scCpfT7UrpX3Coi8LW7l4LP6YLL44nJDPOCx0XHAyhQH7MQp5EWwvhWLtKZ+mJd6qhBNp+1NKIBchVX7CIWc/wO+bLvaW2mLFfvBza0DehZ3/EDq47/xHwkMfPHtXmI3bRljKMVhZ7LqZFaf+O9Q9E/OqHb48QC3IrjrRfNdRyAZIrQO3U9hzo07s54HKh4igEzgKSf+zZZVu70otuwW6dSgjRVG/+/zq49bAQUkWCm0AZg/b2i/tB7kxX1HufbaOKfAIFbSr+h11hhGnjDO6s0EPQKgSWb9KAkJxyDAck0jdC7/eqG9+h2a/PbZC/R9TCwQkKaq7tF+e+V9wHZvi7whhEVYmkJ/VCPPLXu2Bk9m68xoV5FE+5oohXd3NqCdTFS83kz4T2lY4hkRThm3OAZVpHUGPRYHiRUzPBG5ecuXqjjfgUtLcYnI6Rt/b7zd85XKglvtdEHfvrlAsLzK7zujXC9P2drtUgXj+qk0hTc+fKqmUfUa0Db+0vTTu6Rn7boL8Tfb+T1pkZa6RTqGhTOzv5Ha3y7NeIn+Dc+0AHOsnkOninCxDCvhQt79o1slXXa6bOXr1k06bzJpDxZ8w2Cjzit1waxDvpQpTE/Xqyg4Uwr0z3EHIfW082kHQ+qskPUCOAbw30BaTT2TNcPb0V6VnS3JJ1FxacPZA1mLKVIfreauUPRUIJrXoQvEVBX8Kgib8eqa87reHdfHv03jk1kGl4adOa/ophUlAxEWzLwyXDEF/Rpdn4R0ClYvsgaCKUVQ2yzCsUmjteUuIIGUklZulIkFo/5EAhNOg6O3GEf0XcJ/SpjTBsKWZ2k9pwDpihcT37hrqYLMmyHJ6SFmr6VcRqIGo1CVuB0Yv7OH09wV980bviXfjfcXOr1YCYziIJFRLLbrJZKbLmyeOwwkoZTX4tfObZt0ALrfso4EJw+UEa7uvGfYh64xzGJKGeP5MkMBeW1acstq2tQy+Du9VA71o5JlLJWHWN2IMbLKcVc9tUNwCA5A9ppuSm7kkFAj3UNUH84NPvbnH4jnHBhi5IufUmPHxCVrRDjNvSTRfrR0j7trgSt7BYdSh+BvR6n9SIB2myBiD03iWwWBUACTiCZWPEtxpMs8CFNwTfCKhaGPRZOzZN9NJBamxPLFdzkcQJJhFdy/ir5MlTBAYViS77qIB4DrTIllHPem7AvgrUXlhqeT1ZCmo0vqzHqQ5CdQ7mJz6kPe82JYLXqH/iiPCTypkNehM2UmFVVPyUHij1sfBxBEaKA3zSR0akLjaBDW24UfndnD50EfMtB/LX/uIpxw86fGE7TOStaV+/+x8FpwfYxgTBaf9XjpCGV0NGiXa0l6TE/jEY8h6sKSGOGvP3el5l540asE2kVx7eenqFHjcfImM1bqzTwLjcqCUxeFJCsipK8qm5oB9PYM3IWhKiQxVnsOMG0sbu1JOZ/7Kgcp92idSbMDATQPvd59TZnqSu1TajrVnvyl1638mWwJoVeYPll55zvq8q3V8NDNT9m9D4fFPgaBHD/Hm/gVJbsdbinlTRPBPCdIJWvgkVsJ3J4LhY6Tgf9l8k/3E3KQwpeiF9l2ukTdEDV8nbIOM/Hr6MbAnEFXBJ3GocRzWn8Iz6Zxtl1D8G870YITgsNAuxvrVP8JXSuNFSR/xO1AdfjnouuexIGx77DCWckvV/X4LwfsLL8RtahYfaKA1N7ql4mgJvnSn47di16YlN7pPjn/7Td5XQ7iVu62l4Dz+AGCrU0NXwSRT0WbZAngsDxt5Ds+eR/siZAphc/BzTEzJwXZdhZ72QTKL2APQtyVvxwuxFPwc3Jp20yH20WPZqQox3TaHKlWmGtJOdpGqMPu/No7Jxuh1pyCkc9XLf3ivWJ6OU6mTW4EtcDwiNGIX3dijxviFA8DoftXh3HnXgSCaAnNlAt2diyJfboqXjWCiktF4mnAHz6xprnpUYERwfnRK0pRa8zs/X7ihWyiM0gbYMF6Auje4Jjm0pFkVowN+nIREj1esqkBTlc42tLfJ/76YJftGUgS2fxSpqFZfmYTF3df6ddyOhyJEbiiMvq8ZgrN+OBg6kts5DsTOUaNYXMIN5xmXktW28AagvX8p7FWHrP4AAJ8bVGIJ+c5IRLdlqRAWL+6mrym0k3/LAHleDnA/OBdk1ie/TqpsbWVYWnChbcvbLoxYudyNibi5PXjpcfWcDHQH+8E94Gf4Be9gqaXZhKm8Ns/+LzOuEFUTsUR2P9wi30iPUaQ13jB92os09rwlSp7jRV6LuqlGBFGEH2+KSSsDVWQtBmLrt16nf6/wsIlQ+aLUbJ+tj5EmArGa7U8fPt11t6hq8L81l3EJ06EdsvZ5ooCpLRu1Z06XL/nMdYEfhWBQs7udT1GD8XXVH59I1dAcTuMXuBnm01z1rE/MklEI//0OFoPoCmWkEVQ4BwFB2paoij4t5FdLnE7/Z9L84XDKNBsFRQ0BEbHVIqHK070YhAkY86z06zIAFXsh5pVnpXAQtzBHzqnO+y5aEVNkm0cfRxTNpgNIZbWk1oYF0PJNPQiwUTyaxfK7ZIgS3LVIInPwsEB9yxhZPBicGxlfYLfEoqF48mWE4Ge+cKxF6MlCiAdqVFQXgCyz0qa7ioWIU5FouFMjdZHkGn6RkpwG6tPbkoAN1NWeZAt8PZKro6qYadKWRDNpv7+jTbeB0tOIrHkVO4YdF5d4s/LKAkNizoy+4xw2/zTv3/UElZkKvKo18mIbxXbNSsxXSjxWQiWDmaPlGbukFCeeddcbnt+muvW7AXE0Jg0YmncTXTMGosR3d3eVjiKadCTcgySa7v7VEWMmr+OQYm5bwp9VivsIITLHUnvJ9cM7L3V+rp5aBxbVidcARbdNU6GlJzyrN+aDREatKz7Xiprl6E0HQo7lpHIOgEtNeJvwS5cP3UiuUbaTGOl86I76p12OAkkVvJLGpAgKl8P3BXUPPbfzKYZBBzGXa/Wlj7F3uoFRU0+DeUOad1HZKA3p5oido2ge/kL7waJmFx/zF3M7vYM9hZ/CVh6+1JuoeS7bj9kiwkscrE1DPve5D2+JXCVDRE5KxNsNRHlF04NXL4Deas5NqzzPn+MK9bJzgG91agKhNCxFVDES9TPuqjb4DO3Zq32c7TBzyHe/vQx125S//1PxEaCjYAZG0+ou5PPZvLrejYP4IsGu2qK8qL/gWgyjN/u5jVz20HbIKxmY6T83GA3hDE8BqOC/fg36hBvqcWklMAhQhHbon/8h7qTWvnJVZDySCAZTDlTQ/pL0fZv0oibhZNIqanKudiLfN4qgjuW6bHvAgBOcfILWZJRkSiqkG6rHWhiYHbVKGM8xwDed9XNahWcSbNscaAB0aNCb4j4d/i1w1FNpXpfeHQhqlQQ8oWwSXWpsIKh7acfcd1Yp24EoRo1JBl1o8oM6IuAZWz/FZ2eCxmc2T6qn8+wosa2rSZEMs7EKiRwgqYMpiZJx8qNAZ/dBUKKKAfnzg6pCpbN60aG3tv7fX8t8mDSClEVTAk9K+O6FT8Rr4aGbwYeyTVPaJJfhraOEvZ6ptnRRxHNh7pL6S8cCO4n2mTBMT3ocCpIak0zvN/0DDK+AS9JAmNKHsF1d5YDQ/zvYm8InYZuh59XGLLoDjRYLe2o7KGO9/nyCn8+1KTQ1kLFUUJ+lCB3dSayggkFL4i4opYbNU8s7tEjKU7aEJ4DvCFWElFrH+BOiVK3ip3QsX78ssAYVEUFXm6VWnDDp5MT5gNKNzVyxzw1jNcnbuG6slgI2yxHkxiOTmL7vD1h68vB2kY9iCgyrV2oN+7dQ3nDPWl5gubXCk6g2T95BsXyxeIoCaDa0ptevWmquhAVhdo2cigNKLthdSnyRVmuoCiKBAiPLhVEWFcYzO/jgpoDuwSUlfFkNmzi/MfjVk/vHzvz0eYj6SWsuol0ES70zBITqamFAnDyKS49D03oGGc6FLNXLOsVid/Bf2L7zEIZKKcMnEIQvXuVN93pRCEMPkXu0INU2A0w2rXDy0ibdZFqyVPVruNcFxLNLrZMvKgEhxnqXxPgSqSNutZ0j8CwUCtLUq3Rjmf3TL2sz7aNO3afWe60rngqKYad++WeZ2On4simXNOd4ojXo5lpnde0Br0OSoJpMZ1sTC8cZb53U6J4mVMHfPLxkQLgeOTXtsOLDd0+zHYOjPcGJ6sT7DGlBAY/DExAPkuw5U5+DAtSiSpR412PrqwVCarIPsLshgbli4SqpRcbaoB22jAn7cMSUJ+1A7GenBvNu2ME1CZqN71N3vQtLB4Egp8cn1/S7N8G/BDVTwMdaS3lCy0sdx/cciCqb0uIMXmJW4KcMxx9NbYR0ojugNZcyqK5RQ5RXkKYAwH7Xi4TnfwY8OtriiwFxFee3mZt4e/98WmrrIcjHoT24njBVzXORFS99BgxCLSKfQ2F0ZIOV9XV7dfspc+78VlHR3BMoWlFmKlNJUGam8ma8qOGJdg+yQixoJbCahk0QZcla4raup+h4E74Uaq+MgkISZRbRZ2nFzWsOl7ToW1yGjkGixj7Sg/NQRhQJE3oR6cWCBumsy3RpmHEywvfpP11zLA2ROZOrdRuQKwjzP2JNijdQ/ugCsvdmSRLwmQjaGF4K1m46A/fcji3pO7WNNZTMFlAjOiJTAX8ij56/VZu/h74NU5T6zv/9cXBLHx8UMoYzh3NHrEdFB8jmFZ7cc6vgZmV0ocKWHWPPrzuS94X4q0RGL6Mfbk1FBPP0/v7FDSpVckArJTkJ2vBxQ9/YsvA8VsPdIOKhg910hGd2tGQYsecLCR4Hu5T50F2Ml7NQgx1VA4ZVn0b1EV90oHjMcHS7N8UbK5EjC4LZlh13aWPLK/+foljys42cqH+egZgf+1vF4w441njSa2pEA4Sr6GKNIjAWhj1RD4ecjtNGYVSglbNJabddj32TIQ0ZCbGoZ8hwCQlw3eqZadZTvlvGbmqY8jCREHoToegyPdw0C39oaFORE5bG+uuDOS/4BL0/EJME/+hzl8e87gI5kiFN4Bb5+rQHTXAjHGXg303g3Q+05TcnMTnLnc/rD/mVR0hfYKGnlXCcfnNlVQ21U7rWMrQZo8BX+4/JZR3T/g5vYiFC9jvcmOEhiPoGfq/o0h5rESiOZo6/NbWrFSDIj78YRmWHTzSi3Ow/bs7WNYHvSX7xAyJNNAK8Ta3KA9a7mzqx5gP1hNObwaGJXmjnHqwwuDGm0i9+BvFViIvydTSbtZVwe0JrWmB8ZEKM3Z4YjOd78MAEMRJelZXinyLjutaWDmy4EwAcOH2ghV+AfX4ppbXMCng0e4HtN0P3GhthNtd8TauTu+wnU8yHReZfwNezE80ILW7duJnofum13/7Ip7P8VZfCEjGq44ev4bWVcALQkSrEVuUFlNLWKkJI8Asb4I8ymww8CflpgtUBk19nSdjFqjIxcDL3CLD4t2PNw40K1sKYCWRlOmMDizC/5T5yXP4Ijjqd3vW+SFJq70LA+EdSuY/dO3GokYu29IAF55I/7kvPyZ7hS/ORXnxCtBa1Zz9E4aCevS9PwPHtVkq9qsWqpcA43L1+pSfwPHkY8eFQEkZWRv0HwUmTNik9LN5veJYgCRiJbu/XFa/A3FyCOWIRNPPtZhrIJiICdQk07C4sm7pvFMdx2rITOb/ACCrXA9tsm+Vy5wx4jK/ZJy4SwPU4JYCqt2VdPkkPq2uxHN1iuhr+";
+        
+        var submitPass = document.getElementById('submitPass');
+        var passEl = document.getElementById('pass');
+        var invalidPassEl = document.getElementById('invalidPass');
+        var trycatcherror = document.getElementById('trycatcherror');
+        var successEl = document.getElementById('success');
+        var contentFrame = document.getElementById('contentFrame');
+        
+        // Sanity checks
 
-Volatility and consolidation are dominant.
-Selling pressure is evident, especially after initial gains.
-Technical resistance is strong; upside is capped for now.
-Institutional flows are mixed but not enough to drive a breakout.
-Global factors (geopolitics, US yields) are weighing on sentiment.
-Long-term:
+        if (pl === "") {
+            submitPass.disabled = true;
+            passEl.disabled = true;
+            alert("This page is meant to be used with the encryption tool. It doesn't work standalone.");
+            return;
+        }
 
-Bullish undertone due to strong fundamentals and earnings, but not immediately relevant for the next few sessions.
-Consensus Prediction
-Short-term (next few sessions):
+        if (!isSecureContext) {
+            document.querySelector("#passArea").style.display = "none";
+            document.querySelector("#securecontext").style.display = "block";
+            return;
+        }
 
-Nifty is likely to remain under pressure or consolidate with a slight downward bias.
-Upside is capped near resistance levels (22,800–23,000).
-Support is seen around 22,200–22,400; a break below could trigger more selling.
-Volatility will persist due to global and domestic factors.
-Long-term:
+        if (!crypto.subtle) {
+            document.querySelector("#passArea").style.display = "none";
+            document.querySelector("#nocrypto").style.display = "block";
+            return;
+        }
+        
+        function str2ab(str) {
+            var ustr = atob(str);
+            var buf = new ArrayBuffer(ustr.length);
+            var bufView = new Uint8Array(buf);
+            for (var i=0, strLen=ustr.length; i < strLen; i++) {
+                bufView[i] = ustr.charCodeAt(i);
+            }
+            return bufView;
+        }
 
-Bullish outlook remains intact, but current environment favors caution.
-Final Answer:
-Based on the combined analysis from all three LLMs and the latest data from major financial sources, the Nifty is expected to remain volatile and may trend slightly downward or consolidate in the near term. Upside is limited by strong resistance, and caution is advised for the next few sessions. However, the long-term outlook remains positive.
+        async function deriveKey(salt, password) {
+            const encoder = new TextEncoder()
+            const baseKey = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode(password),
+                'PBKDF2',
+                false,
+                ['deriveKey'],
+            )
+            return await crypto.subtle.deriveKey(
+                { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+                baseKey,
+                { name: 'AES-GCM', length: 256 },
+                true,
+                ['decrypt'],
+            )
+        }
+        
+        async function doSubmit(evt) {
+            submitPass.disabled = true;
+            passEl.disabled = true;
 
-If you are trading or investing in the short term, be cautious and watch for support near 22,200–22,400 and resistance near 22,800–23,000.
+            let iv, ciphertext, key;
+            
+            try {
+                var unencodedPl = str2ab(pl);
 
-Let me know if you want a more detailed technical analysis or sector-specific outlook!
-          </li>
-          
-        </ul>
-        <br>
-        <br>
-        <ul class="space-y-3">
-          <li class="bg-gray-800 rounded-lg px-4 py-3 whitespace-pre-line">
-            <span class="font-semibold text-indigo-400 whitespace-pre-line">01-06-2025:</span>  certainly! Let’s break down the Nifty prediction based on the three LLM responses you provided, which reference data from major financial sources (Investing.com, Yahoo Finance, Bloomberg, Reuters, TradingView, Moneycontrol) and recent market activity.
+                const salt = unencodedPl.slice(0, 32)
+                iv = unencodedPl.slice(32, 32 + 16)
+                ciphertext = unencodedPl.slice(32 + 16)
 
-Summary of Each LLM’s Prediction
-1st LLM
-Summary:
-Mixed signals, with sectoral divergence (FMCG underperforming, midcaps resilient).
-Weekly trend: Decline due to profit-booking and global cues.
-Technicals: Key resistance and support levels highlighted, but no clear directional call.
-Tone: Cautious, suggests checking real-time data for actionable insights.
-2nd LLM
-Summary:
-Recent days: Volatility, with Nifty ending the week lower due to macro concerns.
-Sectors: FMCG and Auto weak; some banks and IT stocks strong.
-Short-term: Flat to slightly negative, with cautious trading expected.
-Long-term: Bullish (projection for 2025 is much higher), but short-term volatility persists.
-Tone: Short-term cautious/neutral, long-term bullish.
-3rd LLM (with browsing)
-Summary:
-Short-term (May 30, 2025): Upward momentum expected, driven by strong FPI inflows and positive sentiment ahead of GDP data.
-Technicals: Resistance at 24,820–24,900; breakout above 24,900 could trigger a rally to 25,000+. Support at 24,690; below this, correction to 24,470 possible.
-Sectors: FMCG weak, banks strong.
-Tone: Cautiously optimistic for an upward move, but with caveats (watch for GDP data and global cues).
-Consensus & Prediction
-Short-Term (Next Session/Day or Two)
-Most Recent Data (3rd LLM):
+                key = await deriveKey(salt, passEl.value);
+            } catch (e) {
+                trycatcherror.style.display = "inline";
+                console.error(e);
+                return;
+            }
 
-Bias: Upward/positive, with a likely rally if Nifty breaks above 24,900, supported by strong foreign inflows and positive sentiment.
-Risk: If Nifty fails to hold above 24,690, a correction is possible.
-Other LLMs:
+            try {
+                const decryptedArray = new Uint8Array(
+                    await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
+                );
 
-Bias: Mixed to cautious, with recent volatility and profit-booking, but no strong negative signals.
-Medium to Long-Term
-All LLMs:
-Bias: Bullish, with projections for higher levels by year-end or 2025, assuming macro conditions remain favorable.
-Final Prediction (Synthesized)
-Nifty is expected to open with a cautiously optimistic bias in the immediate term (May 30, 2025), with upside potential if it breaks above the 24,900 resistance level. Strong foreign investor inflows and anticipation of positive GDP data are supportive factors. However, if Nifty fails to hold above 24,690, a short-term correction toward 24,470 is possible.
+                let decrypted = new TextDecoder().decode(decryptedArray);
 
-Overall, the medium- to long-term outlook remains bullish, but traders should watch for volatility around key data releases and global cues.
+                if (decrypted === "") throw "No data returned";
 
-Actionable Levels to Watch
-Bullish Trigger: Break above 24,900 → Target 25,000+
-Bearish Trigger: Fall below 24,690 → Target 24,470
-In summary:
+                const basestr = '<base href="." target="_top">';
+                const anchorfixstr = `
+                    <script>
+                        Array.from(document.links).forEach((anchor) => {
+                            const href = anchor.getAttribute("href");
+                            if (href.startsWith("#")) {
+                                anchor.addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    const targetId = this.getAttribute("href").substring(1);
+                                    const targetEl = document.getElementById(targetId);
+                                    targetEl.scrollIntoView();
+                                });
+                            }
+                        });
+                    <\/script>
+                `;
+                
+                // Set default iframe link targets to _top so all links break out of the iframe
+                if (decrypted.includes("<head>")) decrypted = decrypted.replace("<head>", "<head>" + basestr);
+                else if (decrypted.includes("<!DOCTYPE html>")) decrypted = decrypted.replace("<!DOCTYPE html>", "<!DOCTYPE html>" + basestr);
+                else decrypted = basestr + decrypted;
 
-Short-term: Cautiously optimistic/upward bias, but watch for volatility.
-Medium/long-term: Bullish trend intact.
-Monitor: FPI flows, GDP data, and global market cues for confirmation.
-
-If you want a simple answer:
-
-Nifty is more likely to go up in the next session, provided it breaks above 24,900. Otherwise, expect some volatility. The overall trend remains positive. 
-          </li>
-          
-        </ul>
-      </section>
-    </div>
-    <div id="content4" class="tab-content hidden">
-      <section class="bg-gray-900 rounded-2xl shadow-lg p-7 mb-8">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2 whitespace-pre-line">
-          📑 Reports
-01-06-2025
-Indian equity markets face potential headwinds from several international developments currently shaping global investor sentiment:
-
-U.S.-China Trade Stalemate Impacts Metal Sector
-Metal stocks declined 1.3% amid stalled tariff negotiations between Washington and Beijing[1]. With U.S Treasury Secretary Scott Bessent indicating need for presidential-level intervention[1], prolonged disputes could:
-Reduce global metal demand
-Disrupt supply chains
-Pressure commodity prices
-Reinstated U.S Import Tariffs
-A federal appeals court recently revived steep tariffs on imports[1], potentially affecting:
-
-Indian export competitiveness
-Corporate earnings of export-oriented sectors
-Foreign portfolio investment flows (FPIs injected ₹18,350cr last week)[1]
-Macroeconomic Seasonality Pressures
-June historically brings heightened volatility due to:
-
-Factor	Impact
-Global rate decisions	Currency fluctuations
-Oil price movements	Inflation risks (India imports 85% oil)
-"Sell in May" effect	Delayed profit-taking observed[3]
-Morgan Stanley warns these elements combine with domestic challenges like bureaucratic bottlenecks[4] and income inequality (only 13% workforce meets tax thresholds)[5]. While structural reforms position India for long-term growth[4][5], short-term market movements remain vulnerable to external shocks – particularly from energy markets and developed economy policy shifts[2][3].
-
-
-          31-05-2025
-          Indian equity markets face several international headwinds that could influence performance in May 2025:
-
-Geopolitical Risks & Trade Tensions
-Trump’s tariff threats have heightened volatility[5], with potential impacts on India’s automobile (e.g., M&M’s recent decline[2]), pharmaceutical, textile[5], and steel sectors[4]. Reciprocal tariffs risk disrupting $118B bilateral trade[5], though India is pursuing diplomatic solutions like easing barriers for Tesla[5].
-
-Global protectionism has contributed to FIIs withdrawing over $15B from Indian stocks in 2025 alone[5], exacerbating valuation concerns (Nifty down ~14% from peak)[5].
-
-Macroeconomic Pressures
-Rising U.S. Treasury yields triggered a 644-point Sensex drop on May 22 amid debt ceiling worries[2][3]
-Corporate earnings downgrades hit a five-year high (0.3x upgrade/downgrade ratio)[4], particularly affecting export-reliant industries
-Currency volatility: INR weakened as foreign investment slowed due to growth concerns[5]
-Sector-Specific Challenges
-Sector	Impact	Example
-IT	Reduced global spending outlook	Nifty IT fell 1.31% on May 22[2]
-Metals	Aluminum price fluctuations	Nalco surged on strong prices despite broader decline[2]
-Banking	Rising NPAs from trade disruptions	Nifty Bank dropped 0.58% mid-May[2]
-While domestic institutions provide some buffer ($35B inflows YTD)[4], analysts warn sustained FII outflows combined with expensive valuations (Nifty PE ~23x)[3][4] may prolong correction risks until global uncertainties ease.[1][3][4][5]
-        </h2>
-      
-      </section>
-    </div>
-  </div>
-  <script>
-    // Tabs logic
-    const tabs = [
-      { btn: "tab1", content: "content1" },
-      { btn: "tab2", content: "content2" },
-      { btn: "tab3", content: "content3" },
-      { btn: "tab4", content: "content4" }
-    ];
-    tabs.forEach(({btn, content}, idx) => {
-      document.getElementById(btn).onclick = () => {
-        tabs.forEach(({btn, content}) => {
-          document.getElementById(btn).classList.remove('tab-active');
-          document.getElementById(content).classList.add('hidden');
-        });
-        document.getElementById(btn).classList.add('tab-active');
-        document.getElementById(content).classList.remove('hidden');
-      }
-    });
-  </script>
-</body>
+                // Fix fragment links
+                if (decrypted.includes("</body>")) decrypted = decrypted.replace("</body>", anchorfixstr + '</body>');
+                else if (decrypted.includes("</html>")) decrypted = decrypted.replace("</html>", anchorfixstr + '</html>');
+                else decrypted = decrypted + anchorfixstr;
+                
+                contentFrame.srcdoc = decrypted;
+                
+                successEl.style.display = "inline";
+                setTimeout(function() {
+                    dialogWrap.style.display = "none";
+                }, 1000);
+            } catch (e) {
+                invalidPassEl.style.display = "inline";
+                passEl.value = "";
+                submitPass.disabled = false;
+                passEl.disabled = false;
+                console.error(e);
+                return;
+            }
+        }
+        
+        submitPass.onclick = doSubmit;
+        passEl.onkeypress = function(e){
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            invalidPassEl.style.display = "none";
+            if (keyCode == '13'){
+              // Enter pressed
+              doSubmit();
+              return false;
+            }
+        }
+    })();
+    </script>
+  </body>
 </html>
